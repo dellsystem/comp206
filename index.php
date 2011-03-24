@@ -141,7 +141,7 @@ if ( !isset($title) ) {
               $images = array("moon_thumb", "dune_thumb", "orion_thumb", "iss_thumb", "sunrise_thumb");
               $names = array("The Moon", "Dune", "Orion", "ISS", "Eleyine");
               
-              echo '<li class="go-button"><a class="" href="">&laquo; Go left</a></li>';
+              echo '<li class="go-button"><a class="awesome black large" href="">&laquo; Go left</a></li>';
                 
               foreach( $images as $key => $image) {
                   $name = $names[$key];
@@ -151,13 +151,13 @@ if ( !isset($title) ) {
                           <a class="image_link" href="index.php?mode=room'.$number.'">
                             <img src="images/'.$image.'.jpg" />
                           </a>
-                          <a class="text_link" href="index.php?mode=room'.$number.'">
+                          <a class="text_link awesome black" href="index.php?mode=room'.$number.'">
                             '.$name.'
                           </a>
                         </li>';
               }
 
-              echo '<li class="go-button"><a class="" href="">Go right &raquo;</a></li>';
+              echo '<li class="go-button"><a class="awesome black large" href="">Go right &raquo;</a></li>';
               ?>
               </ul>
             </nav>
