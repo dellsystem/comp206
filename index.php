@@ -89,8 +89,10 @@ if ( !isset($title) ) {
         switch ($mode) {
             case 'login':
                 echo '<p>For now, just enter username: <code>demo</code> and password: <code>demo</code> to access the room shit</p>';
-                echo '<div class="                center"><form method="post" action="">
-                <p><label for="username">Username</label> &nbsp;<input type="text" name="username" id="username" /></p><p><label for="password">Password</label> &nbsp;<input type="password" name="password" id="password" /></p><input type="submit" name="submit" value="Submit" /></div>
+                echo '<div class="form"><form method="post" action="">';
+                echo '<p class="username"><label for="username">Username</label> &nbsp;<input type="text" name="username" id="username" /></p><br />';
+                echo '<p class="password"><label for="password">Password</label> &nbsp;<input type="password" name="password" id="password" /></p>';
+                echo '<p class="submit"><input type="submit" name="submit" value="Submit" /></p></div>
                 </form>';
                 break;
             case 'credits':
