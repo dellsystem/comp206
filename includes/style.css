@@ -39,8 +39,8 @@ body {
 
 .green.awesome, .green.awesome:visited      { background-color: #91bd09; }
 .green.awesome:hover                        { background-color: #749a02; }
-.blue.awesome, .blue.awesome:visited        { background-color: #2daebf; }
-.blue.awesome:hover                         { background-color: #007d9a; }
+.blue.awesome, .blue.awesome:visited        { background-color: #27809A; }
+.blue.awesome:hover                         { background-color: #1E6377; }
 .red.awesome, .red.awesome:visited          { background-color: #e33100; }
 .red.awesome:hover                          { background-color: #872300; }
 .magenta.awesome, .magenta.awesome:visited      { background-color: #a9014b; }
@@ -291,9 +291,5 @@ input:hover, input:focus {
 
 .submit input {
     margin-top: 10px;
-    background: #1492C4;
-    color: #FFFFFF;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
+    border: 0px; /* to get rid of the border imposed above */
 }
-

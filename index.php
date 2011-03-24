@@ -92,7 +92,7 @@ if ( !isset($title) ) {
                 echo '<div class="form"><form method="post" action="">';
                 echo '<p class="username"><label for="username">Username</label> &nbsp;<input type="text" name="username" id="username" /></p><br />';
                 echo '<p class="password"><label for="password">Password</label> &nbsp;<input type="password" name="password" id="password" /></p>';
-                echo '<p class="submit"><input type="submit" name="submit" value="Submit" /></p></div>
+                echo '<p class="submit"><input type="submit" name="submit" value="SUBMIT" class="awesome blue large" /></p></div>
                 </form>';
                 break;
             case 'credits':
@@ -145,8 +145,8 @@ if ( !isset($title) ) {
               $images = array("moon_thumb", "dune_thumb", "orion_thumb", "iss_thumb", "sunrise_thumb");
               $names = array("The Moon", "Dune", "Orion", "ISS", "Eleyine");
               
-              echo '<li class="go-button"><a class="awesome black large" href="">&laquo; Go left</a></li>';
-                
+              echo '<li class="go-button"><a class="awesome blue large" href="">&laquo; Go left</a></li>';
+               // Looool loop, good on you, I was too lazy to do that 
               foreach( $images as $key => $image) {
                   $name = $names[$key];
                   $number = $key+1;
@@ -161,7 +161,7 @@ if ( !isset($title) ) {
                         </li>';
               }
 
-              echo '<li class="go-button"><a class="awesome black large" href="">Go right &raquo;</a><a class="awesome black large" href="">Logout</a></li>';
+              echo '<li class="go-button"><a class="awesome blue large" href="">Go right &raquo;</a><a class="awesome blue large" href="">Logout</a></li>';
               ?>
               </ul>
             </nav>
