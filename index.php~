@@ -108,8 +108,7 @@ if ( !isset($title) ) {
         }?>
         </div>
         </div>
-    </div>
-    <?php 
+        <?php 
         // As you can tell by this PHP magic, menu only shows up for rooms
         if ( isset($menu) ) { ?>
         <div id="footer" class="opacity-80">
@@ -143,5 +142,6 @@ if ( !isset($title) ) {
             </ul>
         </div>
         <?php } ?>
+    </div>
 </body>
 </html>

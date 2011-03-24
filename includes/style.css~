@@ -95,6 +95,7 @@ img {
 
 /* for the "menu" of sorts, within the "rooms" */
 #footer {
+	 margin-top: 160px;
     height: 160px;
     position: relative;
     clear: both;
