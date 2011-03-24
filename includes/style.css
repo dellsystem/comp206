@@ -1,12 +1,72 @@
 body {
+	padding: 0;
+    margin: 0;
+    font-family: 'Lucida Grande', 'Helvetica Neue', Verdana, Arial, sans-serif;
+}
+
+/* Specific body IDs for each page ... for controlling bgimage etc */
+#welcome {
    	background-image: url(../images/earth.jpg);
    	background-position: bottom left;
 	background-attachment: fixed;
 	background-repeat: no-repeat;
 	background-color: #000000;
-	padding: 0;
-    margin: 0;
-    font-family: 'Lucida Grande', Verdana, Helvetica, Arial, sans-serif;
+}
+
+#login {
+    background-image: url(../images/quantum.jpg);
+    background-position: top left;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-color: #000000;
+}
+
+#credits {
+    background-image: url(../images/credits.jpg);
+    background-position: center left;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-color: #000000;
+}
+
+#room1 {
+    background-image: url(../images/moon.jpg);
+    background-position: top right;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-color: #000000;
+}
+
+#room2 {
+    background-image: url(../images/dune.jpg);
+    background-position: bottom left;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-color: #FFFFFF;
+}
+
+#room3 {
+    background-image: url(../images/orion.jpg);
+    background-position: center left;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-color: #000000;
+}
+
+#room4 {
+    background-image: url(../images/iss.jpg);
+    background-position: center left;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-color: #000000;
+}
+
+#room5 {
+    background-image: url(../images/sunrise.jpg);
+    background-position: center left;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-color: #000000;
 }
 
 img {
@@ -32,6 +92,13 @@ img {
     top: 50px;
 }
 
+/* for the "menu" of sorts, within the "rooms" */
+#footer {
+    height: 160px;
+    position: relative;
+    top: 85px;
+}
+
 /* Because there isn't really a better way of doing this ...
 Just doing opacity = whatever will affect child elements too */
 .opacity-80 {
@@ -50,13 +117,14 @@ Just doing opacity = whatever will affect child elements too */
     width: 70px;
 }
 
-#menu li a {
+/* The below apply to menu and menubar links */
+li a {
     color: #C5C5C5;
     text-transform: uppercase;
     text-decoration: none;
 }
 
-#menu li a:hover {
+li a:hover {
     color: #FFFFFF;
 }
 
@@ -70,4 +138,39 @@ Just doing opacity = whatever will affect child elements too */
 .page-body {
     font-size: 1.0em;
     padding: 10px;
+}
+
+/* Because ... that's why */
+.center {
+    margin: 0 auto;
+    width: 400px;
+}
+
+.map-thing {
+    list-style: none;
+    width: 840px;
+    margin: 0 auto;
+}
+
+.map-thing li {
+    float: left;
+    width: 120px;
+    text-transform: uppercase;
+    text-align: center;
+    font-weight: bold;
+    margin: 0 auto;
+}
+
+/* For the go left and go right button */
+.go-button {
+    vertical-align: middle;
+}
+
+/* Map image things only 100% opacity when hovered */
+.transparent a {
+   opacity: 0.5;
+}
+
+.transparent a:hover {
+   opacity: 1.0;
 }
