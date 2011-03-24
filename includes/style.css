@@ -1,72 +1,55 @@
 body {
-	padding: 0;
+    padding: 0;
     margin: 0;
     font-family: 'Lucida Grande', 'Helvetica Neue', Verdana, Arial, sans-serif;
 }
 
 /* Specific body IDs for each page ... for controlling bgimage etc */
+
+body.room {
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-color: #000000;
+}
+
 #welcome {
-   	background-image: url(../images/earth.jpg);
-   	background-position: bottom left;
-	background-attachment: fixed;
-	background-repeat: no-repeat;
-	background-color: #000000;
+    background-image: url(../images/earth.jpg);
+    background-position: bottom left;
 }
 
 #login {
     background-image: url(../images/quantum.jpg);
     background-position: top left;
-    background-attachment: fixed;
-    background-repeat: no-repeat;
-    background-color: #000000;
 }
 
 #credits {
     background-image: url(../images/credits.jpg);
     background-position: center left;
-    background-attachment: fixed;
-    background-repeat: no-repeat;
-    background-color: #000000;
 }
 
 #room1 {
     background-image: url(../images/moon.jpg);
     background-position: top right;
-    background-attachment: fixed;
-    background-repeat: no-repeat;
-    background-color: #000000;
 }
 
 #room2 {
     background-image: url(../images/dune.jpg);
     background-position: bottom left;
-    background-attachment: fixed;
-    background-repeat: no-repeat;
-    background-color: #FFFFFF;
 }
 
 #room3 {
     background-image: url(../images/orion.jpg);
     background-position: center left;
-    background-attachment: fixed;
-    background-repeat: no-repeat;
-    background-color: #000000;
 }
 
 #room4 {
     background-image: url(../images/iss.jpg);
     background-position: center left;
-    background-attachment: fixed;
-    background-repeat: no-repeat;
-    background-color: #000000;
 }
 
 #room5 {
     background-image: url(../images/sunrise.jpg);
     background-position: center left;
-    background-attachment: fixed;
-    background-repeat: no-repeat;
-    background-color: #000000;
 }
 
 img {
@@ -118,7 +101,7 @@ Just doing opacity = whatever will affect child elements too */
 }
 
 /* The below apply to menu and menubar links */
-li a {
+li a, li a:visited {
     color: #C5C5C5;
     text-transform: uppercase;
     text-decoration: none;

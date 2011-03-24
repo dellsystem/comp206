@@ -44,14 +44,32 @@ if ( !isset($title) ) {
     $title = $mode;
 }
 ?>
-<html>
+
+<!doctype html>
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if lt IE 7 ]> <html class="no-js ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]>    <html class="no-js ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]>    <html class="no-js ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
 <head>
+  <meta charset="utf-8">
+
+    <!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame
+         Remove this if you use the .htaccess -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
     <title><?php echo $title; ?></title>
+    <meta name="description" content="Space Traders! An exciting web based commodity trading game.">
+    <meta name="author" content="Clarence, Chantale, Eleyine, Harry, and Wendy">
+
+    <!-- Mobile viewport optimized: j.mp/bplateviewport -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="includes/style.css" type="text/css" />
+    <script src="includes/modernizr-1.7.min.js"></script>
 </head>
 
 <!-- body IDs are used for specific background images -->
-<body id="<?php echo $mode; ?>">
+<body class="room" id="<?php echo $mode; ?>">
     <div id="wrap">
         <div id="header" class="opacity-80">
         <a href="index.php"><img src="title.png" alt="Spacetraders" title="Spacetraders" /></a>
