@@ -82,7 +82,8 @@ if ( !isset($title) ) {
             </ul>
           </nav>
         </header>
-        <div id="content" class="opacity-80">
+        <div id="content">
+        <div id="page" class="opacity-80">
         <div class="page-header"><?php echo $title; ?></div>
         <div class="page-body"><?php
         switch ($mode) {
@@ -127,6 +128,7 @@ if ( !isset($title) ) {
             echo '<p>(This is just a demo site, using PHP for easier testing/etc, to showcase the template. Check out the login page, the rooms, and the credits page. If everyone is okay with the design I will put up the final version of the template on github and put up instructions on creating your room using the template (so you can modify the background and the content). Should happen by Thursday night.)</p>';
             break;
         }?>
+        </div>
         </div>
         </div>
     </div>

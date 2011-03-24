@@ -15,7 +15,7 @@ body {
 /* Awesome CSS3 buttons by ZURB Inc.
  * Copied with permission from http://www.zurb.com/blog_uploads/0000/0617/buttons-03.html */
 .awesome, .awesome:visited {
-    background: #222 url(/images/alert-overlay.png) repeat-x; 
+    background: #222 url(../images/alert-overlay.png) repeat-x; 
     display: inline-block; 
     padding: 5px 10px 6px; 
     color: #fff; 
@@ -113,9 +113,12 @@ body {
 #content {
     width: 960px; /*960 aw yeah*/
     margin: 0 auto;
-    min-height: 300px;
     overflow: auto;
-    padding-bottom: 160px; /* must be same height as the footer */
+    padding-bottom: 200px; /* must be same height as the footer */
+}
+
+#page {
+    min-height: 300px;  
 }
 
 /* Footer */
