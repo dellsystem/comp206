@@ -159,7 +159,7 @@ if ( !isset($title) ) {
                         </li>';
               }
 
-              echo '<li class="go-button"><a class="awesome black large" href="">Go right &raquo;</a></li>';
+              echo '<li class="go-button"><a class="awesome black large" href="">Go right &raquo;</a><a class="awesome black large" href="">Logout</a></li>';
               ?>
               </ul>
             </nav>
