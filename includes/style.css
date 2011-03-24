@@ -1,4 +1,7 @@
 /* Site Wide styles for elements like links, buttons, images */
+body, html {
+  height: 100%;
+}
 body {
     padding: 0;
     margin: 0;
@@ -50,7 +53,47 @@ body {
     color: #FFFFFF;
 }
 
-/* Specific body IDs for each page ... for controlling bgimage etc */
+/* Content */
+
+/* For wrapping around all the body content */
+#wrap {
+    color: #FFF; /* All font should be white */
+    min-height: 100% /* For sticky footer goodness */
+}
+
+/* IE7 fix for wrap */
+.ie7 #wrap {
+    display:table;
+    height:100%;
+}
+
+#content {
+    width: 960px; /*960 aw yeah*/
+    margin: 0 auto;
+    min-height: 300px;
+    overflow: auto;
+    padding-bottom: 160px; /* must be same height as the footer */
+}
+
+/* Footer */
+/* for the "menu" of sorts, within the "rooms" */
+#footer {
+	margin-top: -160px; /* negative value of footer height */  
+    height: 160px;
+    position: relative;
+    clear: both;
+}
+
+/* Opera Fix for sticky footer */
+body:before {
+	content:"";
+	height:100%;
+	float:left;
+	width:0;
+	margin-top:-32767px;/
+}
+
+ /* Specific body IDs for each page ... for controlling bgimage etc */
 body.room {
     background-attachment: fixed;
     background-repeat: no-repeat;
@@ -99,26 +142,6 @@ body.room {
 
 img {
     border: 0; /* to get rid of borders for hyperlinked images */
-}
-
-/* For wrapping around all the body content */
-#wrap {
-    color: #FFF; /* All font should be white */
-}
-
-#content {
-     width: 960px; /*960 aw yeah*/
-    margin: 0 auto;
-    min-height: 300px;
-    overflow: auto;
-    margin-bottom: 160px;
-}
-
-/* for the "menu" of sorts, within the "rooms" */
-#footer {
-    height: 160px;
-    position: relative;
-    clear: both;
 }
 
 /* Because there isn't really a better way of doing this ...

@@ -133,36 +133,37 @@ if ( !isset($title) ) {
     <?php 
         // As you can tell by this PHP magic, menu only shows up for rooms
         if ( isset($menu) ) { ?>
-        <div id="footer" class="opacity-80">
-        <ul class="map-thing">
-        <?php
-        // terrible but fuck it, it's PHP what can I do
-        $room1_class = ($mode == 'room1') ? 'opaque' : 'transparent';
-        $room2_class = ($mode == 'room2') ? 'opaque' : 'transparent';
-        $room3_class = ($mode == 'room3') ? 'opaque' : 'transparent';
-        $room4_class = ($mode == 'room4') ? 'opaque' : 'transparent';
-        $room5_class = ($mode == 'room5') ? 'opaque' : 'transparent';
+        <footer id="footer" class="opacity-80">
+            <nav id="rooms">
+              <ul class="map-thing">
+              <?php
+              // terrible but fuck it, it's PHP what can I do
+              $room1_class = ($mode == 'room1') ? 'opaque' : 'transparent';
+              $room2_class = ($mode == 'room2') ? 'opaque' : 'transparent';
+              $room3_class = ($mode == 'room3') ? 'opaque' : 'transparent';
+              $room4_class = ($mode == 'room4') ? 'opaque' : 'transparent';
+              $room5_class = ($mode == 'room5') ? 'opaque' : 'transparent';
 
-        echo '<li class="go-button"><a href="">Go left</a></li>';
-        echo '<li class="' . $room1_class . '"><a href="index.php?mode=room1"><img src="images/moon_thumb.jpg" /></a></li>';
-        echo '<li class="' . $room2_class . '"><a href="index.php?mode=room2"><img src="images/dune_thumb.jpg" /></a></li>';
-        echo '<li class="' . $room3_class . '"><a href="index.php?mode=room3"><img src="images/orion_thumb.jpg" /></a></li>';
-        echo '<li class="' . $room4_class . '"><a href="index.php?mode=room4"><img src="images/iss_thumb.jpg" /></a></li>';
-        echo '<li class="' . $room5_class . '"><a href="index.php?mode=room5"><img src="images/sunrise_thumb.jpg" /></a></li>';
-        echo '<li class="go-buttom"><a href="">Go right</a></li>';
-        ?>
-        </ul>
-        <br clear="all" />
-        		<ul class="map-thing">
-        			<li>&nbsp;</li>
-        			<li><a href="index.php?mode=room1">The moon</a></li>
-        			<li><a href="index.php?mode=room2">Dune</a></li>
-        			<li><a href="index.php?mode=room3">Orion</a></li>
-        			<li><a href="index.php?mode=room4">ISS</a></li>
-        			<li><a href="index.php?mode=room5">Eleyine</a></li>
-        			<li><a href="index.php">Logout</a></li>
+              echo '<li class="go-button"><a href="">Go left</a></li>';
+              echo '<li class="' . $room1_class . '"><a href="index.php?mode=room1"><img src="images/moon_thumb.jpg" /></a></li>';
+              echo '<li class="' . $room2_class . '"><a href="index.php?mode=room2"><img src="images/dune_thumb.jpg" /></a></li>';
+              echo '<li class="' . $room3_class . '"><a href="index.php?mode=room3"><img src="images/orion_thumb.jpg" /></a></li>';
+              echo '<li class="' . $room4_class . '"><a href="index.php?mode=room4"><img src="images/iss_thumb.jpg" /></a></li>';
+              echo '<li class="' . $room5_class . '"><a href="index.php?mode=room5"><img src="images/sunrise_thumb.jpg" /></a></li>';
+              echo '<li class="go-buttom"><a href="">Go right</a></li>';
+              ?>
+              </ul>
+            </nav>
+            <ul class="map-thing">
+              <li>&nbsp;</li>
+              <li><a href="index.php?mode=room1"></a></li>
+              <li><a href="index.php?mode=room2">Dune</a></li>
+              <li><a href="index.php?mode=room3">Orion</a></li>
+              <li><a href="index.php?mode=room4">ISS</a></li>
+              <li><a href="index.php?mode=room5">Eleyine</a></li>
+              <li><a href="index.php">Logout</a></li>
             </ul>
-        </div>
-        <?php } ?>
+        </footer>
+    <?php } ?>
 </body>
 </html>
