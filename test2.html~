@@ -1,0 +1,13 @@
+<head>
+<link rel="stylesheet" type="text/css" href="style.css" />
+
+</head>
+<html>
+<body class="room" >
+<div id="clock">
+<APPLET CODE="Aclock.class" WIDTH=270 HEIGHT=350 ALIGN="" HSPACE="0">
+</APPLET>
+
+</div>
+<body>
+</html>
