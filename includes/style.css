@@ -111,9 +111,7 @@ body {
 }
 
 #clock {
-    float:right;
-    margin-top:-15px;
-    margin-right: -10px;
+    margin-left: -50px;
 }
 
 #menu li {
