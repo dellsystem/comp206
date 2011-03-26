@@ -78,7 +78,7 @@ if ( !isset($title) ) {
             <ul>
                 <li><a href="index.php">Home</a></li>
                 <li><a href="index.php?mode=login">Login</a></li>
-                <li><a href="index.php?mode=credits">Credits</a></li>
+                <li><a href="index.php?mode=credits" target="_blank"><!-- not exactly good practice but WHATEVER don't judge me -->Credits</a></li>
             </ul>
             <div id="clock">
               <applet CODE="LiteClockApp.class" 
