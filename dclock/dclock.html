@@ -1,0 +1,135 @@
+<html>
+<head>
+<title>
+Digital Clock By David Zhao, Release 2.01, December 23, 1996
+</title>
+</head>
+<body bgcolor=000000 text=88ffff link=ffff44 vlink=ffff44>
+<center>
+<b><font size=6><pre>Digital Clock</pre></font></b><p>
+<table width=600 border=0>
+<th align=left>
+<font size=4 face=arial>
+<b>Rated Top <font color=aa0000>5%</font> WebApplet by JARS. S/N: A090802-4</b>
+<p>
+
+This is a Java Clock that allow you to choose what kind of digits you want to
+display.  You can change the appearance of the clock by designing your own
+set of digits and background.  It also features local time and time-zone settings.
+</font>
+</th>
+</table>
+<p>
+<applet codebase=./
+ code="dclock.class" Width=224 Height=100>
+<param name=bgcolor value="000000">
+<param name=seconds value="yes">
+<param name=24hour value="no">
+<param name=background value="panel4.gif">
+<param name=digits value="bit2.gif">
+</applet>
+<bR>
+<table border=0 width=600>
+<tr align=left>
+<td>
+<b>Installation:</b>
+<ol>
+<li>In your web directory, create a sub-directory for this applet.
+<li>Copy at least one set of digits from here,
+ call it "bit1.gif".  This is your default digit set.
+<p>
+After the steps above, your directory should look somewhat like the following:
+<pre>
+drwx--x--x   3 456    users      512 Mar 15 23:13 ./
+drwx--x--x  11 456    users     2560 Mar 16 12:19 ../
+-r--r--r--   1 456    users     3084 Mar 15 23:13 dclock.class
+-r--r--r--   1 456    users     2690 Mar 15 23:13 bit1.gif
+-rw-r--r--   1 456    users     2011 Mar 15 23:13 bit2.gif
+-rw-r--r--   1 456    users     1864 Mar 15 23:13 bit3.gif
+-rw-r--r--   1 456    users     1091 Mar 16 12:09 anyname.gif
+-rw-r--r--   1 456    users     4096 Mar 16 12:09 background.gif
+</pre>
+<li>Now, the fun part.  Add the following code to your html file:
+<pre>
+&#60;applet codebase=<i><font color=ee0000>location-of-the-dclock.class</font></i>
+ code=dclock.class
+ width=310 height=40&#62;
+&#60;param name=bgcolor value="000000"&#62;
+&#60;param name=digits value="bit1.gif"&#62;
+&#60;param name=background value="background.gif"&#62;
+&#60;param name=timezone value="-0800"&#62;
+&#60;param name=seconds value="no"&#62;
+&#60;param name=24hour value="no"&#62;
+&#60;/applet&#62;
+</pre>
+<li>And here comes your clock.
+</ol>
+
+To customize the clock, you need to design some digits like the sample below.
+The width of the applet should be at least 9 &#215; width-of-the-image or the
+width of the background image, and the
+ height of the applet should be at least height-of-the-image &#247; 14 or
+the height of the background image.
+<p>
+
+<b>Parameters:</b><br>
+<font color=99ff99>bgcolor</font>: Background color (in standard RGB Hex)
+ of your applet. (default: 000000)<br>
+<font color=99ff99>digits</font>: Filename of your custom digits.
+ (default: bit1.gif)<br>
+<font color=99ff99>background</font>: Filename of your custom background.
+ <br>
+<font color=99ff99>seconds</font>: "yes" if you want to show seconds, or "no"
+ otherwise.  In the case of "no", the seperator will flash. (default: yes)<br>
+<font color=99ff99>24hour</font>: "no" if you want the clock to show am/pm.
+ (default: no)<br>
+<font color=99ff99>timezone</font>: Use standard GMT offset, i.e. -0800, +0530,
+ etc.  Ignore this field if you want to show the local time.<p>
+Note: You can simply ignore all parameters to use the default value.<p>
+
+<b>Note and Disclaimer:</b><br>
+<font size=3 face=arial>
+<ul>
+<li>You may use this applet on any website, personal or commerial.
+<li>You may NOT distribute this applet on any form of "Bundleware" without
+my permission.
+<li>You may, however, help me to distribue this applet by including a link
+to this page.  The bottom line is to keep this applet free for anyone who
+might be interested.  I believe this is the spirite of the Internet.
+<li>I do not recommand running more than four copies of this applet on
+the same page.  Even though I have done my best to keep the clock from
+taking more resources than it needs, the applet is still heavily dependable
+on the client's performance.
+<li>Just like many other Java applets, Digital Clock may not run properly
+if you are behind a firewall.  JavaSoft has a work around for this problem,
+click <a href=http://www.javasoft.com/products/JDK/1.0.2/changes.html
+ target="Resource Window">here</a> for detail.
+<li>If you have any interesting digits or background graphics, and want
+to share with others, you can email your work to me.  I will be happy
+to include them in the next distribution.
+</ul>
+</td>
+</tr>
+</table>
+<p>
+This clock shows time in London in 24-hour format.<br>
+<applet codebase=./
+ code="dclock.class" Width=200 Height=59>
+<param name=bgcolor value="000000">
+<param name=seconds value="no">
+<param name=24hour value="yes">
+<param name=timezone value="0000">
+<param name=background value="panel2.gif">
+<param name=digits value="future.gif">
+</applet>
+<hr width=600>
+<font size=4 face=arial>
+To get the latest update of this program, go to
+<a href=http://www.siusa.com/dclock/ target="_top"><i>
+http://www.siusa.com/dclock/</i></a><p>
+To report bugs, email to <a href=mailto:dzhao@cory.eecs.berkeley.edu><i>
+David Zhao<br>dzhao@cory.eecs.berkeley.edu</i></a>
+</font>
+</center>
+</body>
+</html>
