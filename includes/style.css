@@ -39,8 +39,8 @@ body {
 
 .green.awesome, .green.awesome:visited      { background-color: #91bd09; }
 .green.awesome:hover                        { background-color: #749a02; }
-.blue.awesome, .blue.awesome:visited        { background-color: #2daebf; }
-.blue.awesome:hover                         { background-color: #007d9a; }
+.blue.awesome, .blue.awesome:visited        { background-color: #27809A; }
+.blue.awesome:hover                         { background-color: #1E6377; }
 .red.awesome, .red.awesome:visited          { background-color: #e33100; }
 .red.awesome:hover                          { background-color: #872300; }
 .magenta.awesome, .magenta.awesome:visited      { background-color: #a9014b; }
@@ -50,19 +50,41 @@ body {
 .yellow.awesome, .yellow.awesome:visited        { background-color: #ffb515; }
 .yellow.awesome:hover                           { background-color: #fc9200; }
 
+/* Pulsing goodness */
+@-webkit-keyframes pulse {
+ from {
+    -webkit-box-shadow: 0px 2px 4px #0fa0d1;
+    -moz-box-shadow: 0px 2px 4px #0fa0d1;
+    box-shadow: 0px 2px 4px #0fa0d1;
+    border-color: #76d9fa;
+ }
+ to {
+    -webkit-box-shadow: 0px 2px 4px #032029;
+    -moz-box-shadow: 0px 2px 4px #032029;
+    box-shadow: 0px 2px 4px #032029;
+    border-color: #26454f;   
+ }
+}
+
+.pulsed {
+ -webkit-animation-name: pulse;
+ -webkit-animation-duration: 3s;
+ -webkit-animation-direction: alternate;
+ -webkit-animation-timing-function: ease-in-out;
+ -webkit-animation-iteration-count: infinite;
+}
+
+
 /* ---------------------------
  * Header and navigation 
  * --------------------------- */
 #header {
     padding: 10px;
-    height: 55px;
-    margin-bottom: 120px;
+    height: 70px;
+    margin-bottom: 70px;
     background: rgb(17, 17, 17); /* Fallback - opaque */
     background: rgba(17, 17, 17, 0.7);
-    -webkit-box-shadow: 0px 2px 4px #0fa0d1;
-    -moz-box-shadow: 0px 2px 4px #0fa0d1;
-    box-shadow: 0px 2px 4px #0fa0d1;
-    border-bottom: 1px solid #76d9fa;
+    border-bottom: 1px solid #FFF;
 }
 
 #header h1 {
@@ -75,9 +97,19 @@ body {
 }
 
 #menu ul {
-    float: right;
+    /*float: right;*/
     list-style: none;
     padding-right: 20px;
+}
+
+#menu {
+    float: right;
+}
+
+#clock {
+    float:right;
+    margin-top:-15px;
+    margin-right: -10px;
 }
 
 #menu li {
@@ -118,13 +150,23 @@ body {
 }
 
 #page {
-    min-height: 300px;  
+    min-height: 200px;  
+    /* rounded corners in webkit/gecko ... might as well */
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    border: 1px solid #76d9fa;
+    margin: 10px
 }
 
 /* Footer */
 /* for the "menu" of sorts, within the "rooms" */
 #footer {
-	margin-top: -160px; /* negative value of footer height */  
+    -webkit-box-shadow: 0px 0px 6px #0fa0d1;
+    -moz-box-shadow: 0px 0px 6px #0fa0d1;
+    box-shadow: 0px 0px 6px #0fa0d1;
+	  margin-top: -160px; /* negative value of footer height */  
+    border-top: 1px solid #76d9fa;
     height: 160px;
     position: relative;
     clear: both;
@@ -251,4 +293,42 @@ Just doing opacity = whatever will affect child elements too */
 .center {
     margin: 0 auto;
     width: 400px;
+}
+
+/* -----------------------
+ * Styling for the login form
+ * ---------------------- */
+
+.form {
+    width: 250px;
+    margin-left: 300px;
+    text-align: right;
+    margin-top: 10px;
+}
+
+input {
+    padding: 5px;
+    border: solid 1px #FFFFFF;
+    outline: 0;
+    width: 100px;
+    background: #FFFFFF;
+    /* drop shadows for opera, gecko, and webkit */
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 7px;
+    -moz-box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 7px;
+    -webkit-box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 7px;
+}
+
+input:hover, input:focus {
+    border-color: #C9C9C9;
+    -webkit-box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 7px; /*darker shadow*/
+    -moz-box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 7px;
+}
+
+.form label {
+    margin-right: 10px;
+}
+
+.submit input {
+    margin-top: 10px;
+    border: 0px; /* to get rid of the border imposed above */
 }
