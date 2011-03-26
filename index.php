@@ -61,12 +61,12 @@ if ( !isset($title) ) {
 <body class="room" id="<?php echo $mode; ?>">
     <div id="wrap">
     	  <header id="header">
-          <h1><a href="index.php"><img src="title.png" alt="Spacetraders" title="Spacetraders" /></a></h1>
+          <h1><a href="index.php"><img src="images/title.png" alt="Spacetraders" title="Spacetraders" /></a></h1>
           <nav id="menu">
             <ul>
                 <li><a href="index.php">Home</a></li>
                 <li><a href="index.php?mode=login">Login</a></li>
-                <li><a href="index.php?mode=credits">Credits</a></li>
+                <li><a href="index.php?mode=credits" target="_blank"><!-- not exactly good practice but WHATEVER don't judge me -->Credits</a></li>
             </ul>
             <div id="clock">
               <applet CODE="LiteClockApp.class" 
@@ -99,26 +99,23 @@ if ( !isset($title) ) {
                 echo '<p><strong>Person 5</strong><br />Person 5 will put a brief description of his/her room here, and optionally a link to a personal webpage.</p>';
                 break;
             case 'room1':
-                echo '<p>So the first place you land upon leaving Earth is the moon. Which makes sense, really, seeing as it\'s closer to Earth than any of the other things.</p>';
-                echo '<p>What can you do here, besides marvel at your sudden weight loss? Well, the main attractions on this desolate moonscape are the trading of illicit moon dust and the collecting of green cheese. Luckily for you, you don\'t even have to get your hands dirty if you want to acquire some delicious green cheese - you can buy some from the local traders for almost nothing. Unfortunately, that is also how much green cheese is valued outside of the moon, so don\'t expect to get rich buying and selling this commodity.</p>';
-                echo 'Once you get bored of the moon, go ahead and venture to another region. Note that every time you travel, you face the risk of getting hijacked by interstellar pirates, so beware. Maybe you can buy things that lessen your risk of being attacked. Click the "go right" and "go left" icons to follow the recommended path, or venture off on your own by selecting any region (even this one! Go on, try it).';
+                include('room1.html');
                 $menu = true;
                 break;
             case 'room2':
-                echo 'The background image is a sand dune because 1) I\'ve never read dune; 2) sand dunes are awesome; and 3) Harry is a nerd. Replace this background image with a more appropriate one as you wish (although I really can\'t think of anything more appropriate than a sand dune).';
-                echo '<p>At the moment, it\'s possible to go to a planet/thing without first logging in. That is not good, but it doesn\'t matter, because this PHP-based site is just to show what the site might look like. Ignore any PHP-related bugs, please.</p>';
+                include('room2.html');
                 $menu = true;
                 break;
             case 'room3':
-                echo '<p>Welcome to the Orion Nebula! The image you (Chantal) linked in the channel was a bit small, so I found a random image of the orion nebula and put it up for now. Feel free to use whatever image you like though, of course. The Orion nebula is gorgeous so you have a ton of choices.</p>'; 
+                include('room3.html');
                 $menu = true;
                 break;
             case 'room4':
-                echo '<p>Background image: some space station picture that Eleyine found. Enjoy the watermark.</p>';
+                include('room4.html');
                 $menu = true;
                 break;
             case 'room5':
-                echo '<p>I don\'t know what theme you ended up deciding on, so I just put up the image you linked before because I really liked it.</p>';
+                include('room5.html');
                 $menu = true;
                 break;
             default:
