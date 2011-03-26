@@ -10,6 +10,11 @@ body {
     margin: 0;
     font-family: 'Lucida Grande', 'Helvetica Neue', Verdana, Arial, sans-serif;
     color: #FFF;
+    line-height: 1.2;
+}
+
+p {
+  margin-bottom: 0.5em;
 }
 
 /* Awesome CSS3 buttons by ZURB Inc.
@@ -160,7 +165,8 @@ body {
     -moz-border-radius: 10px;
     border-radius: 10px;
     border: 1px solid #76d9fa;
-    margin: 10px
+    margin: 10px;
+    padding: 10px;
 }
 
 /* Footer */
@@ -191,7 +197,6 @@ body:before {
     margin: 0 auto;
     width: 960px;
 }
-
 .map-thing li {
     float: left;
     width: 120px;
@@ -285,12 +290,13 @@ Just doing opacity = whatever will affect child elements too */
     text-transform: uppercase;
     font-weight: bold;
     font-size: 1.8em;
-    padding: 10px;
+    border-bottom: 1px solid #76d9fa;
+    padding-bottom: 2px;
+    margin-bottom: 0.5em;
 }
 
 .page-body {
     font-size: 1.0em;
-    padding: 10px;
 }
 
 /* Because ... that's why */
