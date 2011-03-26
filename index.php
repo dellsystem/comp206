@@ -60,11 +60,7 @@ if ( !isset($title) ) {
 
     <title>SPACE TRADERS: <?php echo $title; ?></title>
     <meta name="description" content="Space Traders! An exciting web based commodity trading game.">
-<<<<<<< HEAD
-    <meta name="author" content="Eleyine ZAROUR">
-=======
     <meta name="author" content="Clarence, Chantale, Eleyine, Harry, and Wendy">
->>>>>>> 7c302940b3292a9375a3a9267807160d436cd8b2
 
     <!-- Mobile viewport optimized: j.mp/bplateviewport -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -84,22 +80,16 @@ if ( !isset($title) ) {
                 <li><a href="index.php?mode=login">Login</a></li>
                 <li><a href="index.php?mode=credits">Credits</a></li>
             </ul>
-<<<<<<< HEAD
             <div id="clock">
-					<applet CODE="LiteClockApp.class" 
-						WIDTH= 100px 
-						HEIGHT=70px 
-						FORE='105,245,255' > 
-							Your browser does not support java.
-					</applet>
-				</div>
+              <applet CODE="LiteClockApp.class" 
+                WIDTH= 100px 
+                HEIGHT=70px 
+                FORE='105,245,255' > 
+                  Your browser does not support java.
+              </applet>
+            </div>
           </nav>
         </header>
-
-=======
-          </nav>
-        </header>
->>>>>>> 7c302940b3292a9375a3a9267807160d436cd8b2
         <div id="content">
         <div id="page" class="opacity-80">
         <div class="page-header"><?php echo $title; ?></div>
