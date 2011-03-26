@@ -3,18 +3,6 @@
 // Just for now
 $mode = $_GET['mode'];
 
-// These are all temp hacks to make the creation process easier
-// The actual site will not be in PHP, of course ...
-if ( isset($_POST['submit']) ) {
-    // Checking for username = demo, password = demo
-    if ( $_POST['username'] == 'demo' && $_POST['password'] == 'demo' ) {
-        $mode = 'room1';
-    } else {
-        // Go back to the login page
-        $mode = 'login';
-    }
-}
-
 switch ($mode) {
     case 'login':
         break;
@@ -97,10 +85,10 @@ if ( !isset($title) ) {
         switch ($mode) {
             case 'login':
                 echo '<p>For now, just enter username: <code>demo</code> and password: <code>demo</code> to access the room shit</p>';
-                echo '<div class="form"><form method="post" action="">';
+                echo '<div class="form"><form method="post" action="login.cgi">';
                 echo '<p class="username"><label for="username">Username</label> &nbsp;<input type="text" name="username" id="username" /></p><br />';
                 echo '<p class="password"><label for="password">Password</label> &nbsp;<input type="password" name="password" id="password" /></p>';
-                echo '<p class="submit"><input type="submit" name="submit" value="SUBMIT" class="awesome blue large" /></p></div>
+                echo '<p class="submit"><input type="submit" name="submit" value="LOGIN" class="awesome blue large" /></p></div>
                 </form>';
                 break;
             case 'credits':
