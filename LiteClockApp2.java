@@ -12,7 +12,7 @@ import java.awt.*;
 import java.util.Date;
 import java.util.StringTokenizer;
 
-final public class LiteClockApp extends java.applet.Applet implements Runnable
+final public class LiteClockApp2 extends java.applet.Applet implements Runnable
 {  volatile boolean over, md;
    long startTime=System.currentTimeMillis()<<1;
    Image buff;
@@ -206,11 +206,11 @@ final public class LiteClockApp extends java.applet.Applet implements Runnable
          buff=createImage(s.width, s.height);
          oldSz=s;
       }
-      Color transparent = new Color(255,255,255,0);
+      //Color transparent = new Color(255,255,255,0);
       Graphics bGr=buff.getGraphics();
-      bGr.setColor(transparent);
+      bGr.setColor(back);
       bGr.fillRect(0, 0, s.width, s.height);///
-      bGr.translate((oldSz.width-h*9)>>1, dateVSize);
+      //bGr.translate((oldSz.width-h*9)>>1, dateVSize);
       drawSymbol(bGr, 0, 0, h>>1, h);
       drawSymbol(bGr, 1, h+(h>>1), h>>1, h);
       drawSymbol(bGr, 2, 4*h, h>>1, h);

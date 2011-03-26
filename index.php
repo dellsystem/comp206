@@ -33,7 +33,7 @@ switch ($mode) {
         $title = 'the international space station (?)';
         break;
     case 'room5':
-        $title = 'eleyine\'s room';
+        $title = 'Nebula X';
         break;
     default:
         $mode = 'welcome';
@@ -78,16 +78,15 @@ if ( !isset($title) ) {
             <ul>
                 <li><a href="index.php">Home</a></li>
                 <li><a href="index.php?mode=login">Login</a></li>
-                <li><a href="index.php?mode=credits">Credits</a></li>
+                <li><a href="index.php?mode=credits">Credits</a></li><br/>
+                <li id="clock"><applet code="dclock.class" Width=300 Height=30>
+								<param name=bgcolor value="000000">
+								<param name=seconds value="yes">
+								<param name=24hour value="yes">
+								<param name=background value="panel.gif">
+								<param name=digits value="bit.gif">
+						</applet></li>
             </ul>
-            <div id="clock">
-					<applet CODE="LiteClockApp.class" 
-						WIDTH= 100px 
-						HEIGHT=70px 
-						FORE='105,245,255' > 
-							Your browser does not support java.
-					</applet>
-				</div>
           </nav>
         </header>
 

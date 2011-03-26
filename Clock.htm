@@ -1,0 +1,35 @@
+<HTML><HEAD><TITLE> Clock</TITLE>
+</HEAD>
+<BODY
+ text="#000000" bgcolor="#ffffff"
+ link="#0000EE" vlink="#551A8B" alink="#FF0000">
+
+<APPLET CODE=
+ "Aclock.class"      
+WIDTH=270
+HEIGHT=350
+ALIGN=""
+HSPACE="0"
+>
+<PARAM NAME="par1" VALUE="1">
+<PARAM NAME="par2" VALUE="Str2">
+
+</APPLET>
+
+
+<script language="JavaScript1.2">
+top.window.mainloaded=false;
+top.window.moveTo(0,0);
+if (document.all) {
+top.window.resizeTo(320,530);
+}
+else if (document.layers||document.getElementById) {
+if (top.window.outerHeight<530||top.window.outerWidth<320){
+top.window.outerHeight = 530;
+top.window.outerWidth = 320;
+}
+}
+</script>
+
+</BODY>
+</HTML>
