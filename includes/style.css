@@ -50,6 +50,31 @@ body {
 .yellow.awesome, .yellow.awesome:visited        { background-color: #ffb515; }
 .yellow.awesome:hover                           { background-color: #fc9200; }
 
+/* Pulsing goodness */
+@-webkit-keyframes pulse {
+ from {
+    -webkit-box-shadow: 0px 2px 4px #0fa0d1;
+    -moz-box-shadow: 0px 2px 4px #0fa0d1;
+    box-shadow: 0px 2px 4px #0fa0d1;
+    border-color: #76d9fa;
+ }
+ to {
+    -webkit-box-shadow: 0px 2px 4px #032029;
+    -moz-box-shadow: 0px 2px 4px #032029;
+    box-shadow: 0px 2px 4px #032029;
+    border-color: #26454f;   
+ }
+}
+
+.pulsed {
+ -webkit-animation-name: pulse;
+ -webkit-animation-duration: 3s;
+ -webkit-animation-direction: alternate;
+ -webkit-animation-timing-function: ease-in-out;
+ -webkit-animation-iteration-count: infinite;
+}
+
+
 /* ---------------------------
  * Header and navigation 
  * --------------------------- */
@@ -59,10 +84,7 @@ body {
     margin-bottom: 70px;
     background: rgb(17, 17, 17); /* Fallback - opaque */
     background: rgba(17, 17, 17, 0.7);
-    -webkit-box-shadow: 0px 2px 4px #0fa0d1;
-    -moz-box-shadow: 0px 2px 4px #0fa0d1;
-    box-shadow: 0px 2px 4px #0fa0d1;
-    border-bottom: 1px solid #76d9fa;
+    border-bottom: 1px solid #FFF;
 }
 
 #header h1 {
@@ -129,15 +151,22 @@ body {
 
 #page {
     min-height: 200px;  
+    /* rounded corners in webkit/gecko ... might as well */
     -webkit-border-radius: 10px;
     -moz-border-radius: 10px;
-    /* rounded corners in webkit/gecko ... might as well */
+    border-radius: 10px;
+    border: 1px solid #76d9fa;
+    margin: 10px
 }
 
 /* Footer */
 /* for the "menu" of sorts, within the "rooms" */
 #footer {
-	margin-top: -160px; /* negative value of footer height */  
+    -webkit-box-shadow: 0px 0px 6px #0fa0d1;
+    -moz-box-shadow: 0px 0px 6px #0fa0d1;
+    box-shadow: 0px 0px 6px #0fa0d1;
+	  margin-top: -160px; /* negative value of footer height */  
+    border-top: 1px solid #76d9fa;
     height: 160px;
     position: relative;
     clear: both;

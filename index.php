@@ -72,7 +72,7 @@ if ( !isset($title) ) {
 <!-- body IDs are used for specific background images -->
 <body class="room" id="<?php echo $mode; ?>">
     <div id="wrap">
-    	  <header id="header">
+    	  <header id="header" class="pulsed">
           <h1><a href="index.php"><img src="images/title.png" alt="Spacetraders" title="Spacetraders" /></a></h1>
           <nav id="menu">
             <ul>
@@ -91,7 +91,7 @@ if ( !isset($title) ) {
           </nav>
         </header>
         <div id="content">
-        <div id="page" class="opacity-80">
+        <div id="page" class="pulsed opacity-80">
         <div class="page-header"><?php echo $title; ?></div>
         <div class="page-body"><?php
         switch ($mode) {
@@ -142,7 +142,7 @@ if ( !isset($title) ) {
     <?php 
         // As you can tell by this PHP magic, menu only shows up for rooms
         if ( isset($menu) ) { ?>
-        <footer id="footer" class="opacity-80">
+        <footer id="footer" class="pulsed opacity-80">
             <nav id="rooms">
               <ul class="map-thing">
               <?php
