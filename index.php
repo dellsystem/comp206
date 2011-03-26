@@ -73,7 +73,7 @@ if ( !isset($title) ) {
 <body class="room" id="<?php echo $mode; ?>">
     <div id="wrap">
     	  <header id="header">
-          <h1><a href="index.php"><img src="title.png" alt="Spacetraders" title="Spacetraders" /></a></h1>
+          <h1><a href="index.php"><img src="images/title.png" alt="Spacetraders" title="Spacetraders" /></a></h1>
           <nav id="menu">
             <ul>
                 <li><a href="index.php">Home</a></li>
