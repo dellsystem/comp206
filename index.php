@@ -91,22 +91,33 @@ if ( !isset($title) ) {
             case 'room1':
                 include('room1.html');
                 $menu = true;
+                $left_url = 'http://www.google.com';
+                $right_url = 'index.php?mode=room2';
+                // I know redundancy but WHATEVER
                 break;
             case 'room2':
                 include('room2.html');
                 $menu = true;
+                $left_url = 'index.php?mode=room1';
+                $right_url = 'index.php?mode=room3';
                 break;
             case 'room3':
                 include('room3.html');
                 $menu = true;
+                $left_url = 'index.php?mode=room2';
+                $right_url = 'index.php?mode=room4';
                 break;
             case 'room4':
                 include('room4.html');
                 $menu = true;
+                $left_url = 'index.php?mode=room3';
+                $right_url = 'index.php?mode=room5';
                 break;
             case 'room5':
                 include('room5.html');
                 $menu = true;
+                $left_url = 'index.php?mode=room4';
+                $right_url = 'http://www.lmgtfy.com';
                 break;
             default:
                 include('home.html');
@@ -127,7 +138,7 @@ if ( !isset($title) ) {
               $images = array("moon_thumb", "dune_thumb", "orion_thumb", "iss_thumb", "sunrise_thumb");
               $names = array("The Moon", "Dune", "Orion", "ISS", "Eleyine");
               
-              echo '<li class="go-button"><a class="awesome blue large" href="">&laquo; Go left</a></li>';
+              echo '<li class="go-button"><a class="awesome blue large" href="' . $left_url . '">&laquo; Go left</a></li>';
                // Looool loop, good on you, I was too lazy to do that 
               foreach( $images as $key => $image) {
                   $name = $names[$key];
@@ -143,7 +154,7 @@ if ( !isset($title) ) {
                         </li>';
               }
 
-              echo '<li class="go-button"><a class="awesome blue large" href="">Go right &raquo;</a><a class="awesome blue large" href="">Logout</a></li>';
+              echo '<li class="go-button"><a class="awesome blue large" href="' . $right_url . '">Go right &raquo;</a><a class="awesome blue large" href="">Logout</a></li>';
               ?>
               </ul>
             </nav>
