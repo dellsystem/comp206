@@ -55,7 +55,11 @@ body {
  * --------------------------- */
 #header {
     padding: 10px;
+<<<<<<< HEAD
     height: 70px;
+=======
+    height: 55px;
+>>>>>>> 7c302940b3292a9375a3a9267807160d436cd8b2
     margin-bottom: 70px;
     background: rgb(17, 17, 17); /* Fallback - opaque */
     background: rgba(17, 17, 17, 0.7);
@@ -75,10 +79,15 @@ body {
 }
 
 #menu ul {
+<<<<<<< HEAD
+=======
+    float: right;
+>>>>>>> 7c302940b3292a9375a3a9267807160d436cd8b2
     list-style: none;
     padding-right: 20px;
 }
 
+<<<<<<< HEAD
 #menu {
     float: right;
 }
@@ -89,6 +98,8 @@ body {
 	margin-right: -10px;
 }
 
+=======
+>>>>>>> 7c302940b3292a9375a3a9267807160d436cd8b2
 #menu li {
     float: left;
     width: 70px;
