@@ -17,6 +17,42 @@ p {
   margin-bottom: 0.5em;
 }
 
+input {
+    font-size: 13px;
+}
+
+input[type=text], input[type=password] {
+    float: left;
+    height: 24px;
+    padding: 3px;
+    width: 300px;
+    border: 1px solid #76d9fa;
+    border-radius: 3px;
+    -moz-border-radius: 3px; 
+    -webkit-border-radius: 3px;
+    outline: 0;
+    background: #FFFFFF;
+    /* drop shadows for opera, gecko, and webkit */
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 7px;
+    -moz-box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 7px;
+    -webkit-box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 7px;
+}
+
+input:hover, input:focus {
+    border-color: #C9C9C9;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 7px;
+    -webkit-box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 7px; /*darker shadow*/
+    -moz-box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 7px;
+}
+
+label {
+    float: left;    
+    display: block;
+    margin-right: 10px;
+    width: 100px;
+    text-align: right;
+}
+
 /* Awesome CSS3 buttons by ZURB Inc.
  * Copied with permission from http://www.zurb.com/blog_uploads/0000/0617/buttons-03.html */
 .awesome, .awesome:visited {
@@ -308,37 +344,14 @@ Just doing opacity = whatever will affect child elements too */
 /* -----------------------
  * Styling for the login form
  * ---------------------- */
-
-.form {
-    width: 250px;
-    margin-left: 300px;
-    text-align: right;
-    margin-top: 10px;
-}
-
-input {
-    padding: 5px;
-    border: solid 1px #FFFFFF;
-    outline: 0;
-    width: 100px;
-    background: #FFFFFF;
-    /* drop shadows for opera, gecko, and webkit */
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 7px;
-    -moz-box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 7px;
-    -webkit-box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 7px;
-}
-
-input:hover, input:focus {
-    border-color: #C9C9C9;
-    -webkit-box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 7px; /*darker shadow*/
-    -moz-box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 7px;
-}
-
-.form label {
-    margin-right: 10px;
+.login {
+  width: 500px;
+  margin: 0 auto;
 }
 
 .submit input {
-    margin-top: 10px;
     border: 0px; /* to get rid of the border imposed above */
+    margin: 0 auto;
+    width: 70px;
+    display: block;
 }
