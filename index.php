@@ -3,18 +3,6 @@
 // Just for now
 $mode = $_GET['mode'];
 
-// These are all temp hacks to make the creation process easier
-// The actual site will not be in PHP, of course ...
-if ( isset($_POST['submit']) ) {
-    // Checking for username = demo, password = demo
-    if ( $_POST['username'] == 'demo' && $_POST['password'] == 'demo' ) {
-        $mode = 'room1';
-    } else {
-        // Go back to the login page
-        $mode = 'login';
-    }
-}
-
 switch ($mode) {
     case 'login':
         break;
