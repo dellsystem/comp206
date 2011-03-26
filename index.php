@@ -46,7 +46,6 @@ if ( !isset($title) ) {
 ?>
 
 <!doctype html>
-<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
 <!--[if lt IE 7 ]> <html class="no-js ie6" lang="en"> <![endif]-->
 <!--[if IE 7 ]>    <html class="no-js ie7" lang="en"> <![endif]-->
 <!--[if IE 8 ]>    <html class="no-js ie8" lang="en"> <![endif]-->
@@ -80,14 +79,6 @@ if ( !isset($title) ) {
                 <li><a href="index.php?mode=login">Login</a></li>
                 <li><a href="index.php?mode=credits">Credits</a></li>
             </ul>
-            <div id="clock">
-              <applet CODE="LiteClockApp.class" 
-                WIDTH= 100px 
-                HEIGHT=70px 
-                FORE='105,245,255' > 
-                  Your browser does not support java.
-              </applet>
-            </div>
           </nav>
         </header>
         <div id="content">
@@ -96,19 +87,10 @@ if ( !isset($title) ) {
         <div class="page-body"><?php
         switch ($mode) {
             case 'login':
-                echo '<p>For now, just enter username: <code>demo</code> and password: <code>demo</code> to access the room shit</p>';
-                echo '<div class="form"><form method="post" action="">';
-                echo '<p class="username"><label for="username">Username</label> &nbsp;<input type="text" name="username" id="username" /></p><br />';
-                echo '<p class="password"><label for="password">Password</label> &nbsp;<input type="password" name="password" id="password" /></p>';
-                echo '<p class="submit"><input type="submit" name="submit" value="SUBMIT" class="awesome blue large" /></p></div>
-                </form>';
+                include('login.html');
                 break;
             case 'credits':
-                echo '<p><strong>Person 1</strong><br />Person 1 will put a brief description of his/her room here, and optionally a link to a personal webpage.</p>';
-                echo '<p><strong>Person 2</strong><br />Person 2 will put a brief description of his/her room here, and optionally a link to a personal webpage.</p>';
-                echo '<p><strong>Person 3</strong><br />Person 3 will put a brief description of his/her room here, and optionally a link to a personal webpage.</p>';
-                echo '<p><strong>Person 4</strong><br />Person 4 will put a brief description of his/her room here, and optionally a link to a personal webpage.</p>';
-                echo '<p><strong>Person 5</strong><br />Person 5 will put a brief description of his/her room here, and optionally a link to a personal webpage.</p>';
+                include('credits.html');
                 break;
             case 'room1':
                 include('room1.html');
@@ -131,10 +113,9 @@ if ( !isset($title) ) {
                 $menu = true;
                 break;
             default:
-                echo '<p>This will be a short paragraph describing the theme of the site, the game, etc. Basically the user is some sort of space traveler trying to make some extra money through space trade. The user starts on Earth and eventually finds his way into the far reaches of outer space blah blah.</p>';
-            echo '<p>(This is just a demo site, using PHP for easier testing/etc, to showcase the template. Check out the login page, the rooms, and the credits page. If everyone is okay with the design I will put up the final version of the template on github and put up instructions on creating your room using the template (so you can modify the background and the content). Should happen by Thursday night.)</p>';
-            break;
-        }?>
+                include('home.html');
+                break;
+        } ?>
         </div>
         </div>
         </div>
