@@ -135,14 +135,8 @@ if ( !isset($title) ) {
               <ul class="map-thing">
               <?php
               // terrible but fuck it, it's PHP what can I do
-<<<<<<< Updated upstream:index.php
-              $images = array("moon_thumb", "dune_thumb", "orion_thumb", "iss_thumb", "memento_thumb");
-              $names = array("The Moon", "Dune", "Orion", "ISS", "MM");
-=======
               $images = array("moon_thumb", "dune_thumb", "orion_thumb", "sss_thumb", "sunrise_thumb");
               $names = array("The Moon", "Dune", "Orion", "SSS", "Eleyine");
->>>>>>> Stashed changes:index.php
-              
               echo '<li class="go-button"><a class="awesome blue large" href="' . $left_url . '">&laquo; Go left</a></li>';
                // Looool loop, good on you, I was too lazy to do that 
               foreach( $images as $key => $image) {
