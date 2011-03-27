@@ -18,7 +18,7 @@ switch ($mode) {
         $title = 'the orion nebula';
         break;
     case 'room4':
-        $title = 'the international space station (?)';
+        $title = 'shatner space station';
         break;
     case 'room5':
         $title = 'Memento Mori';
@@ -135,9 +135,8 @@ if ( !isset($title) ) {
               <ul class="map-thing">
               <?php
               // terrible but fuck it, it's PHP what can I do
-              $images = array("moon_thumb", "dune_thumb", "orion_thumb", "iss_thumb", "memento_thumb");
-              $names = array("The Moon", "Dune", "Orion", "ISS", "MM");
-              
+              $images = array("moon_thumb", "dune_thumb", "orion_thumb", "sss_thumb", "memento_thumb");
+              $names = array("The Moon", "Dune", "Orion", "SSS", "MM");
               echo '<li class="go-button"><a class="awesome blue large" href="' . $left_url . '">&laquo; Go left</a></li>';
                // Looool loop, good on you, I was too lazy to do that 
               foreach( $images as $key => $image) {
