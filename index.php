@@ -21,7 +21,7 @@ switch ($mode) {
         $title = 'the international space station (?)';
         break;
     case 'room5':
-        $title = 'Nebula X';
+        $title = 'Memento Mori';
         break;
     default:
         $mode = 'welcome';
@@ -136,7 +136,7 @@ if ( !isset($title) ) {
               <?php
               // terrible but fuck it, it's PHP what can I do
               $images = array("moon_thumb", "dune_thumb", "orion_thumb", "iss_thumb", "sunrise_thumb");
-              $names = array("The Moon", "Dune", "Orion", "ISS", "Eleyine");
+              $names = array("The Moon", "Dune", "Orion", "ISS", "MM");
               
               echo '<li class="go-button"><a class="awesome blue large" href="' . $left_url . '">&laquo; Go left</a></li>';
                // Looool loop, good on you, I was too lazy to do that 
