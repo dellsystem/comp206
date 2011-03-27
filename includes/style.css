@@ -310,8 +310,13 @@ body.room {
 }
 
 #room5 {
-    background-image: url(../images/sunrise.jpg);
+    background-image: url(../images/memento.jpg);
     background-position: center left;
+}
+
+/* Because the bullet points overlap with the blue frame */
+#tab li {
+   margin-left: 50px;
 }
 
 /* Because there isn't really a better way of doing this ...
