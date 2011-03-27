@@ -12,7 +12,7 @@ switch ($mode) {
         $title = 'the moon';
         break;
     case 'room2':
-        $title = 'dune';
+        $title = 'arrakis';
         break;
     case 'room3':
         $title = 'the orion nebula';
@@ -136,7 +136,7 @@ if ( !isset($title) ) {
               <?php
               // terrible but fuck it, it's PHP what can I do
               $images = array("moon_thumb", "dune_thumb", "orion_thumb", "sss_thumb", "memento_thumb");
-              $names = array("The Moon", "Dune", "Orion", "SSS", "MM");
+              $names = array("The Moon", "Arrakis", "Orion", "SSS", "MM");
               echo '<li class="go-button"><a class="awesome blue large" href="' . $left_url . '">&laquo; Go left</a></li>';
                // Looool loop, good on you, I was too lazy to do that 
               foreach( $images as $key => $image) {
