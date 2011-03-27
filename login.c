@@ -24,15 +24,23 @@ int main(void)
 		fclose(pFile);
 		for(i = 0; i < MAX_LINE; i++){
 			for(j = 0; j < MAX_CHAR; j++){
-				printf("%c", *(htmlContent + i*MAX_CHAR + j));
+				// If characters are supported by browsers
+				// Note: There are more supported characters, but we don't really need them here.
+				if(*(htmlContent + i*MAX_CHAR + j) >= 32 &&
+				   *(htmlContent + i*MAX_CHAR + j) <= 126){
+					printf("%c", *(htmlContent + i*MAX_CHAR + j));
+				}
 			}
+			printf("\n");
 		}
 	}
+	return 0;
 }
+
 
 /**
  * Converts the contents of the text file pointed by pFile to a 2D char array [MAX_LINE][MAX_CHAR] 
- * and returns a pointer to the 2D char array (i.e. array of strings)
+ * and returns a pointer to the array of strings 
  */
 
 char * toString(FILE * pFile)
