@@ -91,7 +91,7 @@ if ( !isset($title) ) {
             case 'room1':
                 include('room1.html');
                 $menu = true;
-                $left_url = 'http://www.cs.mcgill.ca/~llehne/';
+                $left_url = 'http://www.cs.mcgill.ca/~llehne/room-page/room-page.html';
                 $right_url = 'index.php?mode=room2';
                 // I know redundancy but WHATEVER
                 break;
