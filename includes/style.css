@@ -189,7 +189,7 @@ label {
     width: 960px; /*960 aw yeah*/
     margin: 0 auto;
     overflow: auto;
-    padding-bottom: 160px; /* must be same height as the footer */
+    padding-bottom: 161px; /* must be same height as the footer */
 }
 
 #page {
@@ -209,7 +209,7 @@ label {
     -webkit-box-shadow: 0px 0px 6px #0fa0d1;
     -moz-box-shadow: 0px 0px 6px #0fa0d1;
     box-shadow: 0px 0px 6px #0fa0d1;
-    margin-top: -160px; /* negative value of footer height */  
+    margin-top: -161px; /* negative value of footer height */  
     border-top: 1px solid #76d9fa;
     height: 160px;
     position: relative;
