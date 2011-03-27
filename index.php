@@ -47,7 +47,7 @@ if ( !isset($title) ) {
 
     <title>SPACE TRADERS: <?php echo $title; ?></title>
     <meta name="description" content="Space Traders! An exciting web based commodity trading game.">
-    <meta name="author" content="Clarence, Chantale, Eleyine, Harry, and Wendy">
+    <meta name="author" content="Clarence, Chantal, Eleyine, Harry, and Wendy">
 
     <!-- Mobile viewport optimized: j.mp/bplateviewport -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
