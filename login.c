@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #define MAX_CHAR 300
 #define MAX_LINE 100
-#define FILEPATH "/Users/Eleyine/loginErrorMessage.html"
+#define FILEPATH "./loginErrorMessage.html"
 
 /** NOTE: The C program won't compile if MAX_CHAR and MAX_LINE aren't correctly defined. 300 and 100 work in
  * the case of our loginErrorMessage.html file.
