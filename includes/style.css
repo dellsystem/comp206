@@ -312,6 +312,7 @@ body.room {
 #room5 {
     background-image: url(../images/memento.jpg);
     background-position: center left;
+    background-size: 100%;
 }
 
 /* Because the bullet points overlap with the blue frame */
