@@ -345,6 +345,22 @@ Just doing opacity = whatever will affect child elements too */
     margin: 0 auto;
     width: 400px;
 }
+/* for the login error page mainly */
+.text-center {
+    text-align: center;
+    line-height: 1.7em;
+}
+
+.text-center a {
+    color: #FFFFFF;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.text-center a:hover {
+    /* the equivalent of text-decoration: underline, but nicer */
+    border-bottom: #FFFFFF solid 1px;
+}
 
 /* -----------------------
  * Styling for the login form
