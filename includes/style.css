@@ -305,13 +305,19 @@ body.room {
 }
 
 #room4 {
-    background-image: url(../images/iss.jpg);
+    background-image: url(../images/sss.jpg);
     background-position: center left;
 }
 
 #room5 {
-    background-image: url(../images/sunrise.jpg);
+    background-image: url(../images/memento.jpg);
     background-position: center left;
+    background-size: 100%;
+}
+
+/* Because the bullet points overlap with the blue frame */
+#tab li {
+   margin-left: 50px;
 }
 
 /* Because there isn't really a better way of doing this ...
