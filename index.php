@@ -21,7 +21,7 @@ switch ($mode) {
         $title = 'shatner space station';
         break;
     case 'room5':
-        $title = 'memento mori';
+        $title = 'Memento Mori';
         break;
     default:
         $mode = 'welcome';
@@ -92,31 +92,31 @@ if ( !isset($title) ) {
                 include('room1.html');
                 $menu = true;
                 $left_url = 'http://www.cs.mcgill.ca/~llehne/room-page/room-page.html';
-                $right_url = 'http://www.cs.mcgill.ca/~hbrund/index.php?mode=room2';
+                $right_url = 'index.php?mode=room2';
                 // I know redundancy but WHATEVER
                 break;
             case 'room2':
                 include('room2.html');
                 $menu = true;
-                $left_url = 'http://www.cs.mcgill.ca/~wliu65/206/index.php?mode=room1';
-                $right_url = 'http://www.cs.mcgill.ca/~csuder/index.php?mode=room3';
+                $left_url = 'index.php?mode=room1';
+                $right_url = 'index.php?mode=room3';
                 break;
             case 'room3':
                 include('room3.html');
                 $menu = true;
-                $left_url = 'http://www.cs.mcgill.ca/~hbrund/index.php?mode=room2';
-                $right_url = 'http://www.cs.mcgill.ca/~cleung24/comp206/index.php?mode=room4';
+                $left_url = 'index.php?mode=room2';
+                $right_url = 'index.php?mode=room4';
                 break;
             case 'room4':
                 include('room4.html');
                 $menu = true;
-                $left_url = 'http://www.cs.mcgill.ca/~csuder/index.php?mode=room3';
-                $right_url = 'http://www.cs.mcgill.ca/~ezarou/index.php?mode=room5';
+                $left_url = 'index.php?mode=room3';
+                $right_url = 'index.php?mode=room5';
                 break;
             case 'room5':
                 include('room5.html');
                 $menu = true;
-                $left_url = 'http://www.cs.mcgill.ca/~cleung24/comp206/index.php?mode=room4';
+                $left_url = 'index.php?mode=room4';
                 $right_url = 'http://cs.mcgill.ca/~ztrifi/myPage.html';
                 break;
             default:
