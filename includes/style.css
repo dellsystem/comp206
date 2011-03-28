@@ -139,8 +139,8 @@ label {
     float: left;
 }
 #header nav {
-    margin-top: 10px
-    margin-right: 10px
+    margin-right: 10px;
+    width: 240px;
 }
 
 #menu ul {
@@ -154,6 +154,7 @@ label {
 }
 
 #clock {
+    clear: both;
     margin-left: -50px;
 }
 
