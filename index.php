@@ -116,7 +116,7 @@ if ( !isset($title) ) {
             case 'room5':
                 include('room5.html');
                 $menu = true;
-                $left_url = 'http://www.cs.mcgill.ca/~cleung24/index.php?mode=room4';
+                $left_url = 'http://www.cs.mcgill.ca/~cleung24/comp206/index.php?mode=room4';
                 $right_url = 'http://cs.mcgill.ca/~ztrifi/myPage.html';
                 break;
             default:
