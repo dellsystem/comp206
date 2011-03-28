@@ -191,7 +191,7 @@ label {
     width: 960px; /*960 aw yeah*/
     margin: 0 auto;
     overflow: auto;
-    padding-bottom: 261px; /* must be same height as the footer */
+    padding-bottom: 261px; /* must be same height as the footer ... or not */
 }
 
 #page {
