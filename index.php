@@ -117,7 +117,7 @@ if ( !isset($title) ) {
                 include('room5.html');
                 $menu = true;
                 $left_url = 'index.php?mode=room4';
-                $right_url = 'http://cs.mcgill.ca/~asaif/';
+                $right_url = 'http://www.cs.mcgill.ca/~kvilks/room1.html';
                 break;
             default:
                 include('home.html');
