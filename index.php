@@ -92,31 +92,31 @@ if ( !isset($title) ) {
                 include('room1.html');
                 $menu = true;
                 $left_url = 'http://www.cs.mcgill.ca/~llehne/room-page/room-page.html';
-                $right_url = 'index.php?mode=room2';
+                $right_url = 'http://www.cs.mcgill.ca/~hbrund/comp206/index.php?mode=room2';
                 // I know redundancy but WHATEVER
                 break;
             case 'room2':
                 include('room2.html');
                 $menu = true;
-                $left_url = 'index.php?mode=room1';
-                $right_url = 'index.php?mode=room3';
+                $left_url = 'http://www.cs.mcgill.ca/~wliu65/206/index.php?mode=room1';
+                $right_url = 'http://www.cs.mcgill.ca/~csuder/comp206/index.php?mode=room3';
                 break;
             case 'room3':
                 include('room3.html');
                 $menu = true;
-                $left_url = 'index.php?mode=room2';
-                $right_url = 'index.php?mode=room4';
+                $left_url = 'http://www.cs.mcgill.ca/~hbrund/comp206/index.php?mode=room2';
+                $right_url = 'http://www.cs.mcgill.ca/~cleung24/comp206/index.php?mode=room4';
                 break;
             case 'room4':
                 include('room4.html');
                 $menu = true;
-                $left_url = 'index.php?mode=room3';
-                $right_url = 'index.php?mode=room5';
+                $left_url = 'http://www.cs.mcgill.ca/~csuder/comp206/index.php?mode=room3';
+                $right_url = 'http://www.cs.mcgill.ca/~ezarou/index.php?mode=room5';
                 break;
             case 'room5':
                 include('room5.html');
                 $menu = true;
-                $left_url = 'index.php?mode=room4';
+                $left_url = 'http://www.cs.mcgill.ca/~cleung24/index.php?mode=room4';
                 $right_url = 'http://cs.mcgill.ca/~ztrifi/myPage.html';
                 break;
             default:
@@ -137,14 +137,16 @@ if ( !isset($title) ) {
               // terrible but fuck it, it's PHP what can I do
               $images = array("moon_thumb", "dune_thumb", "orion_thumb", "sss_thumb", "memento_thumb");
               $names = array("The Moon", "Arrakis", "Orion", "SSS", "MM");
+	      $devs = array("~wliu65/206/", "~hbrund/comp206/", "~csuder/comp206/", "~cleung24/comp206/", "~ezarou/");
               echo '<li class="go-button"><a class="awesome blue large" href="' . $left_url . '">&laquo; Go left</a></li>';
                // Looool loop, good on you, I was too lazy to do that 
               foreach( $images as $key => $image) {
                   $name = $names[$key];
+		  $dev = $devs[$key];
                   $number = $key+1;
                   $current_class = ($mode == "room".$number ? "current" : "");
                   echo '<li class="'.$current_class.'">
-                          <a class="image_link" href="index.php?mode=room'.$number.'">
+                          <a class="image_link" href="http://www.cs.mcgill.ca/'.$dev.'index.php?mode=room'.$number.'">
                             <img src="images/'.$image.'.jpg" />
                           </a>
                           <a class="text_link awesome black" href="index.php?mode=room'.$number.'">
