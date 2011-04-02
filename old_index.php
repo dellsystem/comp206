@@ -3,18 +3,6 @@
 // Just for now
 $mode = $_GET['mode'];
 
-// These are all temp hacks to make the creation process easier
-// The actual site will not be in PHP, of course ...
-if ( isset($_POST['submit']) ) {
-    // Checking for username = demo, password = demo
-    if ( $_POST['username'] == 'demo' && $_POST['password'] == 'demo' ) {
-        $mode = 'room1';
-    } else {
-        // Go back to the login page
-        $mode = 'login';
-    }
-}
-
 switch ($mode) {
     case 'login':
         break;
@@ -24,16 +12,16 @@ switch ($mode) {
         $title = 'the moon';
         break;
     case 'room2':
-        $title = 'dune';
+        $title = 'arrakis';
         break;
     case 'room3':
         $title = 'the orion nebula';
         break;
     case 'room4':
-        $title = 'the international space station (?)';
+        $title = 'shatner space station';
         break;
     case 'room5':
-        $title = 'eleyine\'s room';
+        $title = 'Memento Mori';
         break;
     default:
         $mode = 'welcome';
@@ -46,7 +34,6 @@ if ( !isset($title) ) {
 ?>
 
 <!doctype html>
-<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
 <!--[if lt IE 7 ]> <html class="no-js ie6" lang="en"> <![endif]-->
 <!--[if IE 7 ]>    <html class="no-js ie7" lang="en"> <![endif]-->
 <!--[if IE 8 ]>    <html class="no-js ie8" lang="en"> <![endif]-->
@@ -60,7 +47,7 @@ if ( !isset($title) ) {
 
     <title>SPACE TRADERS: <?php echo $title; ?></title>
     <meta name="description" content="Space Traders! An exciting web based commodity trading game.">
-    <meta name="author" content="Clarence, Chantale, Eleyine, Harry, and Wendy">
+    <meta name="author" content="Clarence, Chantal, Eleyine, Harry, and Wendy">
 
     <!-- Mobile viewport optimized: j.mp/bplateviewport -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -78,14 +65,15 @@ if ( !isset($title) ) {
             <ul>
                 <li><a href="index.php">Home</a></li>
                 <li><a href="index.php?mode=login">Login</a></li>
-                <li><a href="index.php?mode=credits">Credits</a></li>
+                <li><a href="index.php?mode=credits" target="_blank"><!-- not exactly good practice but WHATEVER don't judge me -->Credits</a></li>
             </ul>
             <div id="clock">
-              <applet CODE="LiteClockApp.class" 
-                WIDTH= 100px 
-                HEIGHT=70px 
-                FORE='105,245,255' > 
-                  Your browser does not support java.
+              <applet code="dclock.class" Width=300 Height=30>
+                <param name=bgcolor value="000000">
+                <param name=seconds value="yes">
+                <param name=24hour value="yes">
+                <param name=background value="panel.gif">
+                <param name=digits value="bit.gif">
               </applet>
             </div>
           </nav>
@@ -96,45 +84,46 @@ if ( !isset($title) ) {
         <div class="page-body"><?php
         switch ($mode) {
             case 'login':
-                echo '<p>For now, just enter username: <code>demo</code> and password: <code>demo</code> to access the room shit</p>';
-                echo '<div class="form"><form method="post" action="">';
-                echo '<p class="username"><label for="username">Username</label> &nbsp;<input type="text" name="username" id="username" /></p><br />';
-                echo '<p class="password"><label for="password">Password</label> &nbsp;<input type="password" name="password" id="password" /></p>';
-                echo '<p class="submit"><input type="submit" name="submit" value="SUBMIT" class="awesome blue large" /></p></div>
-                </form>';
+                include('login.html');
                 break;
             case 'credits':
-                echo '<p><strong>Person 1</strong><br />Person 1 will put a brief description of his/her room here, and optionally a link to a personal webpage.</p>';
-                echo '<p><strong>Person 2</strong><br />Person 2 will put a brief description of his/her room here, and optionally a link to a personal webpage.</p>';
-                echo '<p><strong>Person 3</strong><br />Person 3 will put a brief description of his/her room here, and optionally a link to a personal webpage.</p>';
-                echo '<p><strong>Person 4</strong><br />Person 4 will put a brief description of his/her room here, and optionally a link to a personal webpage.</p>';
-                echo '<p><strong>Person 5</strong><br />Person 5 will put a brief description of his/her room here, and optionally a link to a personal webpage.</p>';
+                include('credits.html');
                 break;
             case 'room1':
                 include('room1.html');
                 $menu = true;
+                $left_url = 'http://www.cs.mcgill.ca/~llehne/room-page/room-page.html';
+                $right_url = 'http://www.cs.mcgill.ca/~hbrund/comp206/index.php?mode=room2';
+                // I know redundancy but WHATEVER
                 break;
             case 'room2':
                 include('room2.html');
                 $menu = true;
+                $left_url = 'http://www.cs.mcgill.ca/~wliu65/206/index.php?mode=room1';
+                $right_url = 'http://www.cs.mcgill.ca/~csuder/comp206/index.php?mode=room3';
                 break;
             case 'room3':
                 include('room3.html');
                 $menu = true;
+                $left_url = 'http://www.cs.mcgill.ca/~hbrund/comp206/index.php?mode=room2';
+                $right_url = 'http://www.cs.mcgill.ca/~cleung24/comp206/index.php?mode=room4';
                 break;
             case 'room4':
                 include('room4.html');
                 $menu = true;
+                $left_url = 'http://www.cs.mcgill.ca/~csuder/comp206/index.php?mode=room3';
+                $right_url = 'http://www.cs.mcgill.ca/~ezarou/index.php?mode=room5';
                 break;
             case 'room5':
                 include('room5.html');
                 $menu = true;
+                $left_url = 'http://www.cs.mcgill.ca/~cleung24/comp206/index.php?mode=room4';
+                $right_url = 'http://cs.mcgill.ca/~ztrifi/myPage.html';
                 break;
             default:
-                echo '<p>This will be a short paragraph describing the theme of the site, the game, etc. Basically the user is some sort of space traveler trying to make some extra money through space trade. The user starts on Earth and eventually finds his way into the far reaches of outer space blah blah.</p>';
-            echo '<p>(This is just a demo site, using PHP for easier testing/etc, to showcase the template. Check out the login page, the rooms, and the credits page. If everyone is okay with the design I will put up the final version of the template on github and put up instructions on creating your room using the template (so you can modify the background and the content). Should happen by Thursday night.)</p>';
-            break;
-        }?>
+                include('home.html');
+                break;
+        } ?>
         </div>
         </div>
         </div>
@@ -147,17 +136,18 @@ if ( !isset($title) ) {
               <ul class="map-thing">
               <?php
               // terrible but fuck it, it's PHP what can I do
-              $images = array("moon_thumb", "dune_thumb", "orion_thumb", "iss_thumb", "sunrise_thumb");
-              $names = array("The Moon", "Dune", "Orion", "ISS", "Eleyine");
-              
-              echo '<li class="go-button"><a class="awesome blue large" href="">&laquo; Go left</a></li>';
+              $images = array("moon_thumb", "dune_thumb", "orion_thumb", "sss_thumb", "memento_thumb");
+              $names = array("The Moon", "Arrakis", "Orion", "SSS", "MM");
+	      $devs = array("~wliu65/206/", "~hbrund/comp206/", "~csuder/comp206/", "~cleung24/comp206/", "~ezarou/");
+              echo '<li class="go-button"><a class="awesome blue large" href="' . $left_url . '">&laquo; Go left</a></li>';
                // Looool loop, good on you, I was too lazy to do that 
               foreach( $images as $key => $image) {
                   $name = $names[$key];
+		  $dev = $devs[$key];
                   $number = $key+1;
                   $current_class = ($mode == "room".$number ? "current" : "");
                   echo '<li class="'.$current_class.'">
-                          <a class="image_link" href="index.php?mode=room'.$number.'">
+                          <a class="image_link" href="http://www.cs.mcgill.ca/'.$dev.'index.php?mode=room'.$number.'">
                             <img src="images/'.$image.'.jpg" />
                           </a>
                           <a class="text_link awesome black" href="index.php?mode=room'.$number.'">
@@ -166,7 +156,7 @@ if ( !isset($title) ) {
                         </li>';
               }
 
-              echo '<li class="go-button"><a class="awesome blue large" href="">Go right &raquo;</a><a class="awesome blue large" href="">Logout</a></li>';
+              echo '<li class="go-button"><a class="awesome blue large" href="' . $right_url . '">Go right &raquo;</a><a class="awesome blue large" href="index.php">Logout</a></li>';
               ?>
               </ul>
             </nav>
