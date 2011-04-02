@@ -6,7 +6,7 @@ partialCheck = re.compile("^partial(.+)$")
 
 class PartialRenderer(dict):
     def __getitem__(self, key):
-        # Check for nonexistant items in the dict, and render them if they are partials
+        # Check for nonexistent items in the dict, and render them if they are partials
         if key not in self:
             name = partialCheck.search(key)
             # Render the doo dad
