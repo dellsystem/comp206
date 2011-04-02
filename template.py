@@ -1,6 +1,6 @@
 import cgi, cgitb, re
-from string import Template
 cgitb.enable() # for error messages
+from string import Template
 
 partialCheck = re.compile("^partial(.+)$")
 
