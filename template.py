@@ -1,29 +1,36 @@
-import cgi
-import cgitb
+import cgi, cgitb, re
+from string import Template
 cgitb.enable() # for error messages
 
-# Function for printing out the header of a page
-def header(page_title):
+partialCheck = re.compile("^partial(.+)$")
+
+class PartialRenderer(dict):
+    def __getitem__(self, key):
+        # Check for nonexistant items in the dict, and render them if they are partials
+        if key not in self:
+            name = partialCheck.search(key)
+            # Render the doo dad
+            if name:
+                return content(name.group(1), self)
+
+        return super(PartialRenderer, self).__getitem__(key) # If its not a partial call, do the standard stuff
+
+def render(name, data):
     print "Content-type: text/html"
     print
-    
-    header_file = open('layout/header.html', 'r')
-    # Replace {PAGE_TITLE} with the actual page title
-    header_str = header_file.read()
-    header_str = header_str.replace('{PAGE_TITLE}', page_title)
-    header_file.close()
 
-    print header_str
+    data['body'] = content(name, data) # Render the body
+    if 'page_name' not in data:
+        # Assign the page name so we can use it as a css class    
+        data['page_name'] = name
 
-# Function for printing out the content of a page - pass it the html file name (without the .html extension)
-def content(filename):
-    content = open('layout/' + filename + '.html', 'r')
-    for line in content:
-        print line,
+    print content("application", data) # Render the body inside the application layout
 
-# Function for printing out the footer of a page
-def footer():
-    footer = open('layout/footer.html', 'r')
-    # Nothing to replace ... just print it out with a loop
-    for line in footer:
-        print line,
+def content(name, data):
+    renderable = PartialRenderer()
+    renderable.update(data)
+    f = open('layout/' + name + '.html', 'r')
+    template = Template(f.read())
+    f.close()
+    return template.substitute(renderable)
+
