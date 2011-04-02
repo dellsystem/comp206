@@ -4,7 +4,7 @@ The state of the repository as it was at the end of assignment 4 is saved under 
 
 1.  Create a new directory in your public_html/ folder called 206-ass5 or something like that.
 2.  Remove or rename the .git directory in your old comp206/ (or whatever) directory, so you don't do stuff in this directory by accident (the old sites need to stay the same until the TAs finish grading them).
-3.  `cd` into the new directory and run `git init`. Then run `git add remote origin git@github.com:dellsystem/comp206.git`, then pull with `git pull origin master`.
+3.  `cd` into the new directory and run `git init`. Then run `git remote add origin git@github.com:dellsystem/comp206.git`, then pull with `git pull origin master`.
 
 Overview of the model
 ---------------------
