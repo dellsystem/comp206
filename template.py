@@ -16,7 +16,8 @@ class PartialRenderer(dict):
         return super(PartialRenderer, self).__getitem__(key) # If its not a partial call, do the standard stuff
 
 def render(name, data):
-    print "Content-type: text/html",
+    print "Content-type: text/html"
+    print
     
     if 'body' not in data:
         # Render the body from a template
