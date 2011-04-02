@@ -16,15 +16,18 @@ class PartialRenderer(dict):
         return super(PartialRenderer, self).__getitem__(key) # If its not a partial call, do the standard stuff
 
 def render(name, data):
-    print "Content-type: text/html"
-    print
+    print "Content-type: text/html",
+    
+    if 'body' not in data:
+        # Render the body from a template
+        data['body'] = content(name, data)    
 
-    data['body'] = content(name, data) # Render the body
     if 'page_name' not in data:
         # Assign the page name so we can use it as a css class    
         data['page_name'] = name
 
     print content("application", data) # Render the body inside the application layout
+    return true
 
 def content(name, data):
     renderable = PartialRenderer()
@@ -33,4 +36,3 @@ def content(name, data):
     template = Template(f.read())
     f.close()
     return template.substitute(renderable)
-
