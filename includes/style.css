@@ -153,11 +153,6 @@ label {
     float: right;
 }
 
-#clock {
-    clear: both;
-    margin-left: -50px;
-}
-
 #menu li {
     float: left;
     width: 70px;
