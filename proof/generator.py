@@ -6,7 +6,34 @@ import item
 
 store_list = parser.get_inventory('inventory.csv')
 num_items = len(store_list)
-money = 100000
+
+form = cgi.FieldStorage()
+
+
+money = int(form["points"].value)
+
+for y in range(0, num_items):
+    if "q%d" % y not in form:
+        continue
+
+    if form["a%d" % y].value == "buy":
+
+        num_buy = int(form["q%d" % y].value)
+        price_buy = store_list[y].cur_price
+        subtotal = num_buy * price_buy
+        store_list[y].updateQnty(-num_buy)
+        money -= subtotal
+
+    elif form["a%d" % y].value == "sell":
+
+        num_sell = int(form["q%d" % y].value)
+        price_sell = store_list[y].cur_price
+        subtotal = num_sell * price_sell
+        store_list[y].updateQnty(num_sell)
+        money += subtotal
+        
+
+parser.write_inventory("inventory.csv", store_list)
 
 print "Content-Type: text/html"
 print
@@ -44,19 +71,11 @@ print "</table>"
 print "<input type=\"hidden\" name=\"points\" value=\"%d\">" % money
 print "<input type=\"submit\" name=\"submit\" value=\"Submit order\"/>"
 print "</form>"
+print "<br />"
+print "You have %d Space Dollars remaining." % money
 print "</body>"
 print "</html>"
 
-form = cgi.FieldStorage()
-money = int(form["points"].value)
-for y in range(0, num_items):
-    if "q%d" % y not in form:
-        continue
-    if "a%d" % y == "buy":
-        num_buy = int(form["q%d" % y].value)
-        store_list[y].updateQnty(-50)
-
-parser.write_inventory("inventory.csv", store_list)
         
         
         

@@ -1,63 +1,11 @@
 <html>
 <head>
-	<title>Proof of Concept</title>
+	<title>Login Page</title>
 </head>
-
 <body>
-<form method="post" action="pricegen.py">
-	<table border="1" cellpadding="5px">
-		<tr>	
-			<td>ITEM IN THE STORE</td>
-			<td># LEFT</td>
-			<td>PRICE</td>
-			<td># BUY</td>
-			<td>ACTION</td>
-		</tr>
-		<tr>
-			<td>giant robot</td>
-			<td></td>
-			<td></td>
-			<td>
-				<input name="q1" maxlength="2" size="2">
-			</td>
-			<td>
-				<select name="a1">
-				<option value="buy">Buy</option>
-				<option value="sell">Sell</option>
-				</select>
-			</td>
-		</tr>
-		<tr>
-		</tr>
-		<tr>
-			<td>small child</td>
-			<td></td>
-			<td></td>
-			<td>
-				<input name="q2" maxlength="2" size="2">
-			<td>
-				<select name="a2">
-				<option value="buy">Buy</option>
-				<option value="sell">Sell</option>
-				</select>
-			</td>
-		</tr>
-		<tr>
-			<td>avocado</td>
-			<td></td>
-			<td></td>
-			<td>
-				<input name="q3" maxlength="2" size="2">
-			</td>
-			<td>
-				<select name="a3">
-				<option value="buy">Buy</option>
-				<option value="sell">Sell</option>
-				</select>
-			</td>
-		</tr>
-	</table>
-	<input type="submit" name="submit" value="Submit order"/>
+<form method="post" action="generator.py">
+	<input type="hidden" name="points" value="100000">
+<input type="submit" name="submit" value="Login to Space Traders">
 </form>
 </body>
-</html>	
+</html>
