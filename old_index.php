@@ -67,14 +67,15 @@ if ( !isset($title) ) {
                 <li><a href="index.php?mode=login">Login</a></li>
                 <li><a href="index.php?mode=credits" target="_blank"><!-- not exactly good practice but WHATEVER don't judge me -->Credits</a></li>
             </ul>
-                <div id="clock"><applet code="dclock.class" Width=300 Height=30>
-								<param name=bgcolor value="000000">
-								<param name=seconds value="yes">
-								<param name=24hour value="yes">
-								<param name=background value="panel.gif">
-								<param name=digits value="bit.gif">
-						</applet>
-                 </div>
+            <div id="clock">
+              <applet code="dclock.class" Width=300 Height=30>
+                <param name=bgcolor value="000000">
+                <param name=seconds value="yes">
+                <param name=24hour value="yes">
+                <param name=background value="panel.gif">
+                <param name=digits value="bit.gif">
+              </applet>
+            </div>
           </nav>
         </header>
         <div id="content">

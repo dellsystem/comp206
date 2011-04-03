@@ -1,0 +1,6 @@
+I think I explained pretty much everything in the comments.
+The key  used is 1. I'll change that once we get login.cgi working.
+If you #define DEBUG, you can see login.cgi in action.
+The room1path and login_error path are #defined at the beginning of login.c, so change that whenever you want.
+
+Also, enter "make all" in the "login folder" to compile login.c, print.c and cipher.c into login.cgi. login.cgi is then automatically copied to the home folder (ass5).
