@@ -4,19 +4,27 @@ import cgi
 import parser
 import item
 
+# Gets data from inventory.csv and stores in a list of Items
+
 store_list = parser.get_inventory('inventory.csv')
 num_items = len(store_list)
 
 form = cgi.FieldStorage()
 
+# Takes the value of points from some previous page
 
 money = int(form["points"].value)
 
 for y in range(0, num_items):
+
+    # Skips calculations for blank quantity numbers
+
     if "q%d" % y not in form:
         continue
 
     if form["a%d" % y].value == "buy":
+
+	# Decreases quantity and points when bought
 
         num_buy = int(form["q%d" % y].value)
         price_buy = store_list[y].cur_price
@@ -26,15 +34,14 @@ for y in range(0, num_items):
 
     elif form["a%d" % y].value == "sell":
 
+	# Increases quantity and points when sold
+
         num_sell = int(form["q%d" % y].value)
         price_sell = store_list[y].cur_price
         subtotal = num_sell * price_sell
         store_list[y].updateQnty(num_sell)
         money += subtotal
         
-
-parser.write_inventory("inventory.csv", store_list)
-
 print "Content-Type: text/html"
 print
 print "<html>"
@@ -51,6 +58,9 @@ print "<td>PRICE</td>"
 print "<td># ACT</td>"
 print "<td>ACTION</td>"
 print "</tr>"
+
+# Creates new table row for each item inside inventory.csv
+# New price is also randomly generated for each item when called
 
 for x in range(0, num_items):
     store_list[x].newPrice()
@@ -76,6 +86,8 @@ print "You have %d Space Dollars remaining." % money
 print "</body>"
 print "</html>"
 
-        
+# Rewrites all changes into inventory.csv
+
+parser.write_inventory("inventory.csv", store_list)        
         
         
