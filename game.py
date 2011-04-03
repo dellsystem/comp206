@@ -33,6 +33,8 @@ class InventoryItem:
         commodities = filter( lambda x: x.name == commodity_name , Commodities)
         if commodities:
             self.commodity = commodities[0]
+        else:
+            self.commodity_name = "Space Junk (%s)" % commodity_name
     
     def updateQnty( self, qnty_change ):
         self.quantity += qnty_change
