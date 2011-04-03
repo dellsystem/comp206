@@ -220,20 +220,19 @@ int main (int argc, const char * argv[])
 		printf("Retrieving cgi input data\n");
 	#endif
 
-	int inputSize = 200;
+	//int inputSize = 200;
 	//char encodedInput[inputSize]; 
-	char unencodedInput[inputSize];
-	//char c;
-	//int n = atoi(getenv("CONTENT_LENGTH"));
-	//char encodedInput[n];
-	//char unencodedInput[n];
+	//char unencodedInput[inputSize];
 	//int min = (inputSize < n)? inputSize : n; 
 	// I don 't know why vybs wanted to limit the input size but here's how I would do it
-	//for(i = 0; (c = getchar()) != EOF && i < n; i++){
-	//	encodedInput[i] = c;
-	//}
-	//encodedInput[i] = '\0';
-	char * encodedInput = "login?username=RoadRunner&password=BipBip";
+	char c;
+	int n = atoi(getenv("CONTENT_LENGTH"));
+	char encodedInput[n];
+	char unencodedInput[n];
+	for(i = 0; (c = getchar()) != EOF && i < n; i++){
+		encodedInput[i] = c;
+	}
+	encodedInput[i] = '\0';
 	unencode(encodedInput,'\0', unencodedInput);
 	strcpy(user_1, getValue("username=", unencodedInput));
 	strcpy(pass_1, getValue("password=", unencodedInput));
