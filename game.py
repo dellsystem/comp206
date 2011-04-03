@@ -13,7 +13,10 @@ class Commodity:
     def __init__(self, name, prices):
         self.name = name
         self.prices = prices
-    
+
+    def toInventoryItem(self):
+        return InventoryItem(self.name, 0, random.choice(self.prices)) 
+
 Commodities = map(lambda x: Commodity(x[0],x[1]), [["Ore",          range(10,20)],
                                                    ["Laser Swords", range(100,200)], 
                                                    ["Cheese",       range(2,4)], 
@@ -23,8 +26,9 @@ Commodities = map(lambda x: Commodity(x[0],x[1]), [["Ore",          range(10,20)
 
 # Class which represents the possession of some commodity by the user. A row in the inventory, if you will.
 class InventoryItem:
-    def __init__(self, commodity_name, quantity):
+    def __init__(self, commodity_name, quantity, price):
         self.quantity = int(quantity)
+        self.price = int(price)
         self.commodity_name = commodity_name
         commodities = filter( lambda x: x.name == commodity_name , Commodities)
         if commodities:
@@ -69,8 +73,21 @@ class Inventory:
 
 # Class which represnets an inventory full of items which may or may not be part of the commodities
 class Planet:
+
     def __init__(self):
-        #self.market = map(lambda com: dict(commodity=com, price=random.choice(com.prices)), Commodities)
+        self._market = {}
+        for com in Commodities:
+            self._market[com.name] = com.toInventoryItem()
+
         self.inventory = Inventory()
+        for item in self.inventory.items:
+            if item.commodity_name in self._market:
+                self._market[item.commodity_name]['quantity'] += item.quantity
+            else:
+                self._market[item.commodity_name] = item
 
-
+    def market(self):
+        print "Content-type: text/html"
+        print
+        print self._market
+        return [{'name': x.commodity_name, 'quantity':x.quantity, 'price':x.price} for k, x in self._market.iteritems()]

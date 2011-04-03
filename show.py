@@ -11,7 +11,7 @@ planet = game.Planet()
 description = template.content("room{0}".format(room_number), room)
 
 # Get the rows of the price table
-table_rows = [template.content("price_table_row", {'item_name': row['commodity'].name}) for row in planet.market]
+table_rows = [template.content("price_table_row", row) for row in planet.market()]
 
 # Get the table using the rows
 table = template.content("price_table", dict(rows = ''.join(table_rows)))
