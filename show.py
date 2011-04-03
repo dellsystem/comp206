@@ -22,7 +22,12 @@ table = template.content("price_table", dict(rows = ''.join(table_rows)))
 
 # Get the map for use in the footer
 def room_url(index):
-    return 'show.py?room=%d' % index
+    if index == 0:
+        return 'http://www.cs.mcgill.ca/~llehne/room-page/room-page.html'
+    elif index == 6:
+        return 'http://cs.mcgill.ca/~ztrifi/myPage.html'
+    else:
+        return 'show.py?room=%d' % index
 
 footer_rows = ""
 for i,r in enumerate(game.Rooms):
@@ -35,5 +40,5 @@ template.render("room", {'page_title': room['title'],
                          'description': description, 
                          'table': table, 
                          'footer_rows': footer_rows,
-                         'left_url': room_url((room_number-2) % 5 + 1),
-                         'right_url':room_url((room_number) % 5 + 1)})
+                         'left_url': room_url(room_number-1),
+                         'right_url':room_url(room_number+1)})
