@@ -11,10 +11,10 @@
 #define lineDelim 9 
 // ascii 9 gives a nice output on excel (values appear on separate lines)
 
-#define csvpath "../database/users.csv"
-#define room1path "../room1tmp.html"
-#define errorpath "../login_error.html"
-//#define DEBUG
+#define csvpath "database/users.csv"
+#define room1path "roomtest.html"
+#define errorpath "login_error.html"
+#define DEBUG
 
 // Global Variables
 // Input
