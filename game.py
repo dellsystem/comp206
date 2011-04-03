@@ -1,10 +1,10 @@
 import random
 
 Rooms = [{'name': "The Moon", 'title': "The Moon", 'image':"moon_thumb", 'url':"~wliu65/206/"},
-         {'name': "Arrakis", 'title': "Arrakis", 'image':"dune_thumb", 'url':"~hbrund/206/"},
+         {'name': "Arrakis", 'title': "Arrakis", 'image':"arrakis_thumb", 'url':"~hbrund/206/"},
          {'name': "Orion", 'title': "The Orion Nebula", 'image':"orion_thumb", 'url':"~csuder/206/"},
          {'name': "SSS", 'title': "Shatner Space Station", 'image':"sss_thumb", 'url':"~cleung24/206/"},
-         {'name': "MM", 'title': "Memento Mori", 'image':"memento_thumb", 'url':"~ezarou/206/"},
+         {'name': "MM", 'title': "Memento Mori", 'image':"mm_thumb", 'url':"~ezarou/206/"},
         ]
 
 class Commodity:

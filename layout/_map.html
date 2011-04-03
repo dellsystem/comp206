@@ -6,14 +6,16 @@
     <nav id="rooms">
         <ul class="map-thing">
             <li class="go-button">
-                <a class="awesome blue large" href="{LEFT_LINK}">&laquo; Go left</a>
+                <a class="awesome blue large" href="$left_url">&laquo; Go left</a>
             </li>
             <!-- BEGIN -->
-            <li>
-            <a class="image_link" href="{ROOM_URL}"><img src="{IMAGE_URL}" /></a>
-            <a class="text_link awesome black" href="{ROOM_URL}">{ROOM_NAME}</a>
-            </li>
+            $footer_rows
             <!-- END -->
+            <li class="go-button">
+                <a class="awesome blue large" href="$right_url">Go right &raquo;</a>
+                <a class="awesome blue large" href="index.php">Logout</a>
+            </li>
+        </ul>
     </nav>
     </footer>
 
