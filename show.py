@@ -34,3 +34,4 @@ template.render("room", {'page_title': room['title'],
                          'footer_rows': footer_rows,
                          'left_url': room_url((room_number-2) % 5 + 1),
                          'right_url':room_url((room_number) % 5 + 1)})
+
