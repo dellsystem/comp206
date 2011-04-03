@@ -13,8 +13,8 @@ class Commodity:
     def toInventoryItem(self):
         return InventoryItem(self.name, 0, random.choice(self.prices)) 
 
-# Class which represents the possession of some commodity by the user. A row in the inventory, if you will.
-# Holds the name of the commodity, the quantity possesed by the user, and the price at this instant.
+# Class which represents the possession of some commodity by the planet. A row in the inventory, if you will.
+# Holds the name of the commodity, the quantity possesed by the planet, and the price at this instant.
 class InventoryItem:
     def __init__(self, commodity_name, quantity, price):
         self.quantity = int(quantity)
@@ -33,8 +33,8 @@ class InventoryItem:
         csv = '%s,%d,\n' % (self.commodity_name, self.quantity)
         return csv      
 
-# Class which represents the collection of currently owned items, and manages reading and writing this to disk
-class Inventory:
+# Class which represents the collection of currently available items, and manages reading and writing this to disk
+class PlanetInventory:
     def __init__(self, filename="database/inventory.csv"):
         self.filename = filename
         self.read() # Grab the inventory items upon creation
@@ -67,7 +67,7 @@ class Inventory:
 class Planet:
     def __init__(self):
         self._market = {}
-        self.inventory = Inventory()
+        self.inventory = PlanetInventory()
         
         # The market has all the standard commodities by default.
         for com in Commodities:
