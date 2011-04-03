@@ -8,7 +8,7 @@ room = game.Rooms[room_number-1]
 planet = game.Planet()
 
 # Get the planet's descriptiong from the file
-description = template.content("room{0}".format(room_number), room)
+description = template.content("room%d" % room_number, room)
 
 # Get the rows of the price table
 table_rows = [template.content("price_table_row", row) for row in planet.market()]
@@ -19,7 +19,7 @@ table = template.content("price_table", dict(rows = ''.join(table_rows)))
 # Get the map for use in the footer
 
 def room_url(index):
-    return 'show.py?room={0}'.format(index)
+    return 'show.py?room=%d' % index
 
 footer_rows = ""
 for i,r in enumerate(game.Rooms):
@@ -28,7 +28,7 @@ for i,r in enumerate(game.Rooms):
                                                    'room_url':  room_url(i + 1)})
 # Render the room template
 template.render("room", {'page_title': room['title'], 
-                         'page_name': "room{0}".format(room_number), 
+                         'page_name': "room%d" % room_number, 
                          'description': description, 
                          'table': table, 
                          'footer_rows': footer_rows,
