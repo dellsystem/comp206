@@ -14,7 +14,7 @@
 #define csvpath "database/users.csv"
 #define room1path "roomtest.html"
 #define errorpath "login_error.html"
-#define DEBUG
+//#define DEBUG
 
 // Global Variables
 // Input
@@ -134,8 +134,7 @@ boolean verify()
 /*------------------------ MAIN ---------------------*/
 
 int main (int argc, const char * argv[]) 
-{		
-	
+{			
 	#ifdef DEBUG
 		printf("Entered main()\n");
 	#endif
