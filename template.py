@@ -135,8 +135,12 @@ def render(name, data):
     if 'page_name' not in data:
         # Assign the page name so we can use it as a css class    
         data['page_name'] = name
+    
+    if 'layout' not in data:
+        # Set the default layout for the rendering
+        data['layout'] = 'application'
 
-    print content("application", data) # Render the body inside the application layout
+    print content(data['layout'], data) # Render the body inside the application layout
     return True
 
 def content(name, data):
