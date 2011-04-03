@@ -22,18 +22,27 @@ table = template.content("price_table", dict(rows = ''.join(table_rows)))
 
 # Get the map for use in the footer
 def room_url(index):
-    return 'show.py?room=%d' % index
+    if index == 0:
+        return 'http://www.cs.mcgill.ca/~llehne/room-page/room-page.html'
+    elif index == 6:
+        return 'http://cs.mcgill.ca/~ztrifi/myPage.html'
+    else:
+        return 'show.py?room=%d' % index
 
 footer_rows = ""
 for i,r in enumerate(game.Rooms):
     footer_rows += template.content("footer_row", {'room_name': r['name'], 
                                                    'image_url': "images/"+r['image']+".jpg", 
-                                                   'room_url':  room_url(i + 1)})
+                                                   'room_url':  room_url(i + 1),
+                                                   'room_id': 'room' + str(i+1)})
 # Render the room template
 template.render("room", {'page_title': room['title'], 
                          'page_name': "room%d" % room_number, 
                          'description': description, 
                          'table': table, 
                          'footer_rows': footer_rows,
-                         'left_url': room_url((room_number-2) % 5 + 1),
-                         'right_url':room_url((room_number) % 5 + 1)})
+                         'left_url': room_url(room_number-1),
+                         'right_url':room_url(room_number+1)})
+
+# Testing that the forms actually work
+print form["LOL"].value

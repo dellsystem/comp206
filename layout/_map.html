@@ -6,13 +6,20 @@
     <nav id="rooms">
         <ul class="map-thing">
             <li class="go-button">
-                <a class="awesome blue large" href="$left_url">&laquo; Go left</a>
+                <!-- gotta do this stupid form 7 times ugh -->
+                <form method="post" name="left_url" action="$left_url">
+                <input type="hidden" name="LOL" value="LOL" />
+                </form>
+                <a class="awesome blue large" onclick="document.left_url.submit()">&laquo; Go left</a>
             </li>
             <!-- BEGIN -->
             $footer_rows
             <!-- END -->
             <li class="go-button">
-                <a class="awesome blue large" href="$right_url">Go right &raquo;</a>
+                <form method="post" name="right_url" action="$right_url">
+                <input type="hidden" name="LOL" value="LOL" />
+                </form>
+                <a class="awesome blue large" onclick="document.right_url.submit()">Go right &raquo;</a>
                 <a class="awesome blue large" href="index.php">Logout</a>
             </li>
         </ul>

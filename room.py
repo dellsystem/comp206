@@ -11,10 +11,8 @@ rooms = {1: 'The moon', 2: 'Arrakis', 3: 'The Orion Nebula', 4: 'Shatner Space S
 room_number = 1
 
 page_title = rooms[1]
-template.header(page_title)
-template.content('room' + str(room_number))
+
+template.render('room' + str(room_number), dict(page_title="test", page_name="test")
 
 # Map stuff ... only valid in the rooms page, but defined in template
-# Pass it the room number, will make it opaque
-template.map(room_number)
 # Uses a different footer so we don't need the standard one
