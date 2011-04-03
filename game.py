@@ -89,4 +89,4 @@ class Planet:
                 self._market[item.commodity_name] = item
 
     def market(self):
-        return [{'name': x.commodity_name, 'quantity':x.quantity, 'price':x.price} for k, x in self._market.iteritems()]
+        return [{'name': x.commodity_name, 'quantity':x.quantity, 'price':x.price, 'available_quantity': 200} for k, x in self._market.iteritems()]

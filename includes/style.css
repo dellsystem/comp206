@@ -375,3 +375,16 @@ Just doing opacity = whatever will affect child elements too */
     width: 70px;
     display: block;
 }
+
+/* ----------------------
+ * Styling for the buy form
+ * ---------------------- */
+.price_table td, .price_table th {
+    padding: 0px 0px 0px 5px;
+}
+.price_table td.buy, .price_table td.sell {
+    padding-left: 20px;
+}
+.price_table td input {
+    width: 30px;
+}
