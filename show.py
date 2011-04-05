@@ -37,7 +37,7 @@ try:
         elif index == 6:
             return 'http://cs.mcgill.ca/~ztrifi/myPage.html'
         else:
-            return 'show.py?room=%d' % index
+            return 'show.py'
 
     points_form = user_inventory.render()
     footer_rows = ""
@@ -57,7 +57,9 @@ try:
                              'points': user_inventory.points,
                              'footer_rows': footer_rows,
                              'left_url': room_url(room_number-1),
+                             'left_room': room_number-1,
                              'right_url': room_url(room_number+1),
+                             'right_room': room_number+1,
                              'points_form': points_form})
 
 except game.MalformedGameFormError:

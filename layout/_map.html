@@ -8,6 +8,7 @@
         <ul class="map-thing">
             <li class="go-button">
                 <form method="post" name="rooms" action="$left_url">
+                    <input type="hidden" name="room" value="$left_room" />
                     $points_form
                     <input type="submit" class="awesome blue large" value="&laquo; Go left">
                 </form>
@@ -17,6 +18,7 @@
             <!-- END -->
             <li class="go-button">
                 <form method="post" name="rooms" action="$right_url">
+                    <input type="hidden" name="room" value="$right_room" />
                     $points_form
                     <input type="submit" class="awesome blue large" value="Go right &raquo;">
                 </form>
