@@ -1,7 +1,7 @@
 #include "print.h"
 #define crazy_num 2000
-//#define DEBUG
 // Pretty lame but how am I supposed to know the maximal characters in a .html line?
+//#define DEBUG
 
 // Prints to browser the contents of the file in the string file path
 int print(char * filePath)
@@ -9,6 +9,7 @@ int print(char * filePath)
 	#ifdef DEBUG
 		printf("Entered print()\n");
 	#endif
+
 	char * currentLine = (char*) malloc (crazy_num);
 	printf("%s%c%c\n","Content-Type:text/html;charset=iso-8859-1", 13, 10);
 	FILE * pFile = fopen(filePath, "rt");
@@ -19,11 +20,12 @@ int print(char * filePath)
 		}
 		fclose(pFile);
 	} else {
+
 	#ifdef DEBUG
 		printf("Unable to load file %s\n", filePath);
 	#endif
+
 	}
-	//printf("print html stuff yay");
 	#ifdef DEBUG
 		printf("Exit print()\n");
 	#endif
@@ -41,6 +43,7 @@ char * filter(char * src, int minASCII, int maxASCII)
 	// The filtered string's length is at most equal to the source's length
 	char * dst = (char*) malloc (strlen(src)); 
 	*dst = '\0';
+
 	int dstIndex;
 	for(dstIndex = 0; *src != '\0'; src++){
 		if(*src >= minASCII &&
@@ -50,9 +53,11 @@ char * filter(char * src, int minASCII, int maxASCII)
 		}
 	}
 	*(dst + dstIndex) = '\0';
-#ifdef DEBUG
-	printf("Exit filter()\n");
-#endif
+
+	#ifdef DEBUG
+		printf("Exit filter()\n");
+	#endif
+
 	return dst;
 }
 
