@@ -45,6 +45,10 @@ input:hover, input:focus {
     -moz-box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 7px;
 }
 
+input[type="submit"].awesome {
+    border: 0px;
+}
+
 label {
     float: left;    
     display: block;
@@ -255,10 +259,10 @@ body:before {
     margin-top: 4px
 }
 /* Map image things only 100% opacity when hovered */
-.map-thing li img {
+.map-thing li input[type="image"] {
    opacity: 0.5;  
 }
-.map-thing li.current img, .map-thing li a:hover img {
+.map-thing li.current input[type="image"], .map-thing li input[type="image"]:hover {
    opacity: 1.0;
 }
 

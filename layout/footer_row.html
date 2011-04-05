@@ -1,4 +1,7 @@
 <li>
-    <a class="image_link" onclick="submitRoom(${room_id})"><img src="$image_url" /></a>
-    <a class="text_link awesome black" onclick="submitRoom(${room_id})">$room_name</a>
+    <form method="post" name="rooms" action="$room_url">
+        $points_form
+        <input type="image" class="image_link" src="$image_url" />
+        <input type="submit" class="text_link awesome black" value="$room_name">
+    </form>
 </li>
