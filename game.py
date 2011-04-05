@@ -93,9 +93,9 @@ class UserInventory:
                       self.items.append(InventoryItem(value, 1, random.choice([1,2,3])))
 
     def render(self):
-        s = '<input type="hidden" name="points" value=""' + str(self.points) + '">'
+        s = '<input type="hidden" name="points" value="' + str(self.points) + '" />'
         for i, item in enumerate(self.items):
-            s += '<input type="hidden" name="Inventory' + str(i+1) + '" value="' + str(item.quantity) + '">'
+            s += '<input type="hidden" name="Inventory' + str(i+1) + '" value="' + str(item.quantity) + '" />'
         return s
 
 # Class which represnets an inventory full of items which may or may not be part of the commodities
