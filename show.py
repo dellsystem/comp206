@@ -34,15 +34,18 @@ for i,r in enumerate(game.Rooms):
     footer_rows += template.content("footer_row", {'room_name': r['name'], 
                                                    'image_url': "images/"+r['image']+".jpg", 
                                                    'room_url':  room_url(i + 1),
-                                                   'room_id': 'room' + str(i+1)})
-# Render the room template
-template.render("room", {'page_title': room['title'], 
-                         'page_name': "room%d" % room_number, 
-                         'description': description, 
-                         'table': table, 
-                         'footer_rows': footer_rows,
-                         'left_url': room_url(room_number-1),
-                         'right_url':room_url(room_number+1)})
-
-# Testing that the forms actually work
-print form["LOL"].value
+                                                   'room_id': i+1})
+# IF THE USER HAS GOTTEN HERE BY LEGITIMATE MEANS
+# working on this
+if form.has_key("LOL"):
+    # Render the room template
+    template.render("room", {'page_title': room['title'] + form["LOL"].value, 
+                             'page_name': "room%d" % room_number, 
+                             'description': description, 
+                             'table': table, 
+                             'footer_rows': footer_rows,
+                             'left_url': room_url(room_number-1),
+                             'right_url':room_url(room_number+1)})
+else:
+    # Go back to the login page teehee
+    template.render("login", dict(page_title="Login", layout="logged_out"))

@@ -1,8 +1,4 @@
 <li>
-    <form method="post" action="$room_url" name="$room_id">
-    <!-- oh god hidden input fields kill me now -->
-    <input type="hidden" name="LOL" value="LOLOLOL" />
-    </form>
-    <a class="image_link" onclick="document.${room_id}.submit()"><img src="$image_url" /></a>
-    <a class="text_link awesome black" onclick="document.${room_id}.submit()">$room_name</a>
+    <a class="image_link" onclick="submitRoom(${room_id})"><img src="$image_url" /></a>
+    <a class="text_link awesome black" onclick="submitRoom(${room_id})">$room_name</a>
 </li>
