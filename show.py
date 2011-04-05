@@ -5,6 +5,7 @@ import template, game, cgi
 
 # Figure out the room number and grab the room info
 form = cgi.FieldStorage()
+# Note: "room" is a POST variable, not GET anymore
 room_number = int(form.getfirst("room", 1)) # Default of the first room
 room = game.Rooms[room_number-1]
 
@@ -37,12 +38,17 @@ for i,r in enumerate(game.Rooms):
                                                    'room_id': i+1})
 # IF THE USER HAS GOTTEN HERE BY LEGITIMATE MEANS
 # working on this
-if form.has_key("LOL"):
+# Only logged in if there's a points input field
+# This will be true if we're coming from another game/room/login
+# So it works out, k
+if form.has_key("points"):
     # Render the room template
-    template.render("room", {'page_title': room['title'] + form["LOL"].value, 
+    template.render("room", {'page_title': room['title'], 
                              'page_name': "room%d" % room_number, 
                              'description': description, 
                              'table': table, 
+                             # Sanitise shit later whatever
+                             'points': form['points'].value,
                              'footer_rows': footer_rows,
                              'left_url': room_url(room_number-1),
                              'right_url':room_url(room_number+1)})
