@@ -7,25 +7,19 @@
     <nav id="rooms">
         <ul class="map-thing">
             <li class="go-button">
-                <!-- gotta do this stupid form 7 times ugh -->
-                <form method="post" name="left_url" action="$left_url">
-                <input type="hidden" name="points" value="$points" />
+                <form method="post" name="rooms" action="$left_url">
+                    $points_form
+                    <input type="submit" class="awesome blue large" value="&laquo; Go left">
                 </form>
-                <a class="awesome blue large" onclick="document.left_url.submit()">&laquo; Go left</a>
             </li>
-            <!-- i think i just got a brilliant idea to minimise repeats-->
-            <form method="post" name="rooms" action="show.py">
-            <input type="hidden" name="points" value="$points" />
-            <input type="hidden" name="room" id="room_field"  value="" />
-            </form>
             <!-- BEGIN -->
             $footer_rows
             <!-- END -->
             <li class="go-button">
-                <form method="post" name="right_url" action="$right_url">
-                <input type="hidden" name="points" value="$points" />
+                <form method="post" name="rooms" action="$right_url">
+                    $points_form
+                    <input type="submit" class="awesome blue large" value="Go right &raquo;">
                 </form>
-                <a class="awesome blue large" onclick="document.right_url.submit()">Go right &raquo;</a>
                 <a class="awesome blue large" href="index.php">Logout</a>
             </li>
         </ul>
