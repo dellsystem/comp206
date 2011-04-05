@@ -12,6 +12,21 @@ int print(char * filePath)
 
 	char * currentLine = (char*) malloc (crazy_num);
 	printf("%s%c%c\n","Content-Type:text/html;charset=iso-8859-1", 13, 10);
+    // First print out the header file
+    
+    // static login_header.html because C's string functions suck
+    FILE *headerFile = fopen("layout/login_header.html", "rt");
+    if ( headerFile != NULL ) {
+        while (fgets(currentLine, crazy_num, headerFile) != NULL) {
+            printf("%s\n", filter(currentLine, 32, 126));
+            // filter thing = ASCII character workaround
+            memset(currentLine, ' ', strlen(currentLine) + 1);
+        }
+        fclose(headerFile);
+    } else {
+        printf("Omg header file wtf");
+    }
+
 	FILE * pFile = fopen(filePath, "rt");
 	if(pFile != NULL){
 		while(fgets(currentLine, crazy_num, pFile) != NULL){
