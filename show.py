@@ -45,6 +45,7 @@ try:
         footer_rows += template.content("footer_row", {'room_name': r['name'],
                                                        'image_url': "images/"+r['image']+".jpg",
                                                        'room_url':  room_url(i + 1),
+                                                       'room_id': i+1, 
                                                        'points_form': points_form})
 
     # Render the room template
