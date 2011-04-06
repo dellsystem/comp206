@@ -43,8 +43,8 @@ class InventoryItem:
 
 # Class which represents the collection of currently available items, and manages reading and writing this to disk
 class PlanetInventory:
-    def __init__(self, filename="database/inventory.csv"):
-        self.filename = filename
+    def __init__(self, room_number):
+        self.filename = "database/inventory" + str(room_number) + ".csv" 
         self.read() # Grab the inventory items upon creation
 
     def read(self):
@@ -102,9 +102,9 @@ class UserInventory:
 
 # Class which represnets an inventory full of items which may or may not be part of the commodities
 class Planet:
-    def __init__(self, user_inventory, form):
+    def __init__(self, user_inventory, form, room):
         self.market = {}
-        self.inventory = PlanetInventory()
+        self.inventory = PlanetInventory(room)
         self.user_inventory = user_inventory
         # The market has all the standard commodities by default.
         for com in Commodities:
@@ -140,7 +140,7 @@ class Planet:
         self.market = [row for key, row in self.market.iteritems()]
 
 # Constant listing all the rooms and their attributes
-Rooms = [{'name': "The Moon", 'title': "The Moon", 'image':"moon_thumb", 'url':"~wliu65/206/"},
+Rooms = [{'name': "The Moon", 'title': "The Moon", 'image':"moon_thumb", 'url':"~wliu65/206-5/"},
       {'name': "Arrakis", 'title': "Arrakis", 'image':"arrakis_thumb", 'url':"~hbrund/206/"},
       {'name': "Orion", 'title': "The Orion Nebula", 'image':"orion_thumb", 'url':"~csuder/206/"},
       {'name': "SSS", 'title': "Shatner Space Station", 'image':"sss_thumb", 'url':"~cleung24/206/"},
