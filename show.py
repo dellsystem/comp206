@@ -21,14 +21,25 @@ try:
     # Planet class does all the backend stuff.
     planet = game.Planet(user_inventory, form, room_number)
 
+    points_form = user_inventory.render()
+    errors = planet.purchase_order_errors()
+
+    if len(errors) > 0:
+      # Redisplay form with errors
+      error_text = "<br/>".join(errors)
+    else:
+      error_text = ""
+
+    # Render stuff
+
     # Get the planet's description from the file
     description = template.content("room%d" % room_number, room)
 
     # Get the rows of the price table
-    table_rows = [template.content("price_table_row", row) for row in planet.market]
+    table_rows = [template.content("price_table_row", dict(num=i, **row)) for i, row in enumerate(planet.market)]
 
     # Get the table using the rows
-    table = template.content("price_table", dict(rows = ''.join(table_rows)))
+    table = template.content("price_table", {'rows':''.join(table_rows), 'points_form': points_form})
 
     # Get the map for use in the footer
     def room_url(index):
@@ -39,7 +50,6 @@ try:
         else:
             return 'show.py'
 
-    points_form = user_inventory.render()
     footer_rows = ""
     for i,r in enumerate(game.Rooms):
         footer_rows += template.content("footer_row", {'room_name': r['name'],
@@ -53,6 +63,7 @@ try:
                              'page_name': "room%d" % room_number,
                              'description': description,
                              'table': table,
+                             'errors': error_text,
                              # Sanitise shit later whatever
                              'points': user_inventory.points,
                              'footer_rows': footer_rows,
