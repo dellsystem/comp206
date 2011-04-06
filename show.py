@@ -21,7 +21,7 @@ try:
     # Planet class does all the backend stuff.
     planet = game.Planet(user_inventory, form, room_number)
 
-    errors_or_points = planet.commit_purchase_order
+    errors_or_points = planet.commit_purchase_order()
     if isinstance(errors_or_points, list):
       # There were errors processing the buy form. Redisplay form with errors.
       error_text = "<br/>".join(errors)

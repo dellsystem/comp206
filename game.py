@@ -25,18 +25,14 @@ class InventoryItem:
         if commodities:
             self.commodity = commodities[0]
         else:
-            self.commodity_name = "Space Junk (%s)" % commodity_name
+            if not re.search('Space Junk \((.+)\)', self.commodity_name):
+                self.commodity_name = "Space Junk (%s)" % commodity_name
 
     def updateQnty( self, qnty_change ):
         self.quantity += qnty_change
 
     def getCSV( self ):
-        m = re.search('Space Junk \((.+)\)', self.commodity_name)
-        if m:
-            name = m.group(1)
-        else:
-            name = commodity_name
-        csv = '%s,%d\n' % (name, self.quantity)
+        csv = '%s,%d\n' % (self.commodity_name, self.quantity)
         return csv
 
     def fromCSV(entry):
@@ -62,8 +58,7 @@ class PlanetInventory:
         for entry in inventory:
             entry.strip('\n')
             new_item = InventoryItem.fromCSV(entry)
-            self.items.append(new_item)
-            self.items_dict[new_item.commodity_name] = new_item
+            self.addItem(new_item)
         return self.items
 
     def write(self):
@@ -74,6 +69,10 @@ class PlanetInventory:
 
         inv_file.close()
         return self.items
+
+    def addItem(self, new_item):
+        self.items.append(new_item)
+        self.items_dict[new_item.commodity_name] = new_item
 
 # Raised when the form tag describing a user's inventory isn't correctly formatted
 class MalformedGameFormError(Exception):
@@ -99,14 +98,16 @@ class UserInventory:
                 else:
                     # Does not match our inventory spec. Take a tiny quantity.
                     item = InventoryItem(value, 1)
-                self.items.append(item)
-                self.items_dict[item.commodity_name] = item
 
+                self.addItem(item)
     def render(self):
         s = '<input type="hidden" name="points" value="' + str(self.points) + '" />'
         for i, item in enumerate(self.items):
             s += '<input type="hidden" name="Inventory' + str(i+1) + '" value="' + str(item.quantity) + '" />'
         return s
+    def addItem(self, item):
+        self.items.append(item)
+        self.items_dict[item.commodity_name] = item
 
 # Class which represnets an inventory full of items which may or may not be part of the commodities
 class Planet:
@@ -154,6 +155,8 @@ class Planet:
 
     def commit_purchase_order(self):
         errors = []
+        print "Content-type: text/html"
+        print
 
         if 'points' not in self.form:
             errors.append("Malformed form, please try submitting again!")
@@ -165,12 +168,18 @@ class Planet:
             m = re.search("com_name_([0-9]+)", key)
             if not not m:
                 num = m.group(1)
+
                 # Qty, action, price group found. Check all values are present
                 commodity_name = self.form.getfirst("com_name_"+num)
                 quantity = self.form.getfirst("qty_"+num)
                 action = self.form.getfirst("action_"+num)
                 price = self.form.getfirst("price_"+num)
                 
+                print commodity_name
+                print quantity
+                print action
+                print price
+
                 if not commodity_name or not quantity or not action or not price:
                     errors.append("Malformed form, please try submitting again!")
                     break
@@ -183,9 +192,17 @@ class Planet:
                         if not commodity_name in self.inventory.items_dict:
                             errors.append("You can't buy "+commodity_name+" from this planet, it doesn't have any!")
                             continue
+
                         if quantity > self.inventory.items_dict[commodity_name].quantity:
                             errors.append("You can't buy more "+commodity_name+" than is available, sorry.")
                             continue
+                        
+                        # Ensure user has an inventory item representing this item.
+                        if commodity_name not in self.user_inventory.items:
+                            self.user_inventory.addItem(InventoryItem(commodity_name, 0))
+
+                        print commodity_name
+                        print self.user_inventory.items_dict
 
                         points -= price * quantity
                         self.user_inventory.items_dict[commodity_name].quantity += quantity
@@ -194,6 +211,7 @@ class Planet:
                         if not commodity_name in self.user_inventory.items_dict:
                             errors.append("You can't sell "+commodity_name+" because you don't have any! Tisk!")
                             continue
+
                         if quantity > self.user_inventory.items_dict[commodity_name]:
                             errors.append("You can't sell more "+commodity_name+"than you have. Tisk!")
                             continue
