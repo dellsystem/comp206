@@ -21,17 +21,18 @@ try:
     # Planet class does all the backend stuff.
     planet = game.Planet(user_inventory, form, room_number)
 
-    points_form = user_inventory.render()
-    errors = planet.purchase_order_errors()
-
-    if len(errors) > 0:
-      # Redisplay form with errors
+    errors_or_points = planet.commit_purchase_order
+    if isinstance(errors_or_points, list):
+      # There were errors processing the buy form. Redisplay form with errors.
       error_text = "<br/>".join(errors)
     else:
+      # The inventory commited the transaction. Write it to disk.
+      user_inventory.points = errors_or_points
+      planet.inventory.write()
       error_text = ""
 
     # Render stuff
-
+    points_form = user_inventory.render()
     # Get the planet's description from the file
     description = template.content("room%d" % room_number, room)
 

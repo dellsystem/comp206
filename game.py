@@ -31,7 +31,7 @@ class InventoryItem:
         self.quantity += qnty_change
 
     def getCSV( self ):
-        csv = '%s,%d,\n' % (self.commodity_name, self.quantity)
+        csv = '%s,%d\n' % (self.commodity_name, self.quantity)
         return csv
 
     def fromCSV(entry):
@@ -147,14 +147,12 @@ class Planet:
 
         self.market = [row for key, row in self.market.iteritems()]
 
-    def purchase_order(self):
-        return True
-
-    def purchase_order_errors(self):
+    def commit_purchase_order(self):
         errors = []
 
         if 'points' not in self.form:
-            return ["Malformed form, please try submitting again!"]
+            errors.append("Malformed form, please try submitting again!")
+            return errors
         else:
             points = int(self.form.getfirst('points'))
         
@@ -185,7 +183,8 @@ class Planet:
                             continue
 
                         points -= price * quantity
-
+                        self.user_inventory.items_dict[commodity_name].quantity += quantity
+                        self.inventory.items_dict[commodity_name].quantity -= quantity
                     elif action == "sell":
                         if not commodity_name in self.user_inventory.items_dict:
                             errors.append("You can't sell "+commodity_name+" because you don't have any! Tisk!")
@@ -195,14 +194,19 @@ class Planet:
                             continue
 
                         points += price * quantity
+                        self.user_inventory.items_dict[commodity_name].quantity -= quantity
+                        self.inventory.items_dict[commodity_name].quantity += quantity
                     else:
                         errors.append("Malformed form, please try submitting again!")
                         break
-
         if points < 0:
             errors.append("You don't have enough money for these transactions, sorry.")
+        
+        if len(errors) > 0:
+            return errors
+        else:
+            return points
 
-        return errors
 # Constant listing all the rooms and their attributes
 Rooms = [{'name': "The Moon", 'title': "The Moon", 'image':"moon_thumb", 'url':"~wliu65/206-5/"},
         {'name': "Arrakis", 'title': "Arrakis", 'image':"arrakis_thumb", 'url':"~hbrund/206/"},
