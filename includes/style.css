@@ -399,3 +399,8 @@ Just doing opacity = whatever will affect child elements too */
 .price_table td input {
     width: 30px;
 }
+.errors {
+    border: 1px solid #F00;
+    padding: 10px;
+    margin-bottom: 1em;
+}
