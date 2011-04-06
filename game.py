@@ -12,11 +12,11 @@ class Commodity:
     def toInventoryDict(self):
         return {'name': self.name, 'quantity': 0, 'available_quantity': 0}
 
+class MalformedCSVError(Exception):
+    pass
+
 # Class which represents the possession of some commodity by the planet. A row in the inventory, if you will.
 # Holds the name of the commodity, the quantity possesed by the planet, and the price at this instant.
-class MalformedCSVError(Exception):
-  pass
-
 class InventoryItem:
     def __init__(self, commodity_name, quantity):
         self.quantity = int(quantity)
@@ -34,17 +34,16 @@ class InventoryItem:
         csv = '%s,%d,\n' % (self.commodity_name, self.quantity)
         return csv
 
-    @staticmethod
     def fromCSV(entry):
         values = entry.split(',')
         if not len(values) == 2:
-          raise MalformedCSVError
+            raise MalformedCSVError
         return InventoryItem(*values)
-
+    fromCSV = staticmethod(fromCSV)
 # Class which represents the collection of currently available items, and manages reading and writing this to disk
 class PlanetInventory:
     def __init__(self, room_number):
-        self.filename = "database/inventory" + str(room_number) + ".csv" 
+        self.filename = "database/inventory" + str(room_number) + ".csv"
         self.read() # Grab the inventory items upon creation
 
     def read(self):
@@ -55,7 +54,7 @@ class PlanetInventory:
         self.items = []
         for entry in inventory:
             entry.strip('\n')
-            new_item = InventoryItem.fromCSV(entry)            
+            new_item = InventoryItem.fromCSV(entry)
             self.items.append(new_item)
 
         return self.items
@@ -108,10 +107,14 @@ class Planet:
         self.user_inventory = user_inventory
         # The market has all the standard commodities by default.
         for com in Commodities:
-            # Gets an inventory item using the submitted price if its given, and lets the 
+            # Gets an inventory item using the submitted price if its given, and lets the
             # commodity pick one otherwise.
             self.market[com.name] = com.toInventoryDict()
-            self.market[com.name]['price'] = random.choice(com.prices)
+            key = 'price_'+com.name
+            if key in form:
+                self.market[com.name]['price'] = form.getfirst(key)
+            else:
+                self.market[com.name]['price'] = random.choice(com.prices)
 
         # Loop through the items in the planet's inventory. If its a standard item, then
         # add the quantity to the existing item. If its non standard, add it to the list.
@@ -132,23 +135,23 @@ class Planet:
                 self.market[item.commodity_name]['quantity'] += item.quantity
             else:
                 self.market[item.commodity_name] = {'name': item.commodity_name, 'quantity': item.quantity, 'available_quantity': 0}
-        
+
         for key, item in self.market.iteritems():
             if 'price' not in item:
-              self.market[key]['price'] = random.choice([1,2,3])
+                self.market[key]['price'] = random.choice([1,2,3])
 
         self.market = [row for key, row in self.market.iteritems()]
 
 # Constant listing all the rooms and their attributes
 Rooms = [{'name': "The Moon", 'title': "The Moon", 'image':"moon_thumb", 'url':"~wliu65/206-5/"},
-      {'name': "Arrakis", 'title': "Arrakis", 'image':"arrakis_thumb", 'url':"~hbrund/206/"},
-      {'name': "Orion", 'title': "The Orion Nebula", 'image':"orion_thumb", 'url':"~csuder/206/"},
-      {'name': "SSS", 'title': "Shatner Space Station", 'image':"sss_thumb", 'url':"~cleung24/206/"},
-      {'name': "MM", 'title': "Memento Mori", 'image':"mm_thumb", 'url':"~ezarou/206/"}]
+        {'name': "Arrakis", 'title': "Arrakis", 'image':"arrakis_thumb", 'url':"~hbrund/206/"},
+        {'name': "Orion", 'title': "The Orion Nebula", 'image':"orion_thumb", 'url':"~csuder/206/"},
+        {'name': "SSS", 'title': "Shatner Space Station", 'image':"sss_thumb", 'url':"~cleung24/206/"},
+        {'name': "MM", 'title': "Memento Mori", 'image':"mm_thumb", 'url':"~ezarou/206/"}]
 
 # Constant listing the default commodities available on every planet, and the range of prices each one might adopt
 Commodities = map(lambda x: Commodity(x[0],x[1]), [["Ore",         range(10,20)],
-                                                  ["Laser Swords", range(100,200)],
-                                                  ["Cheese",       range(2,4)],
-                                                  ["Melange",      range(1000,6000)],
-                                                  ["Whatever",     range(10,20)]])
+    ["Laser Swords", range(100,200)],
+    ["Cheese",       range(2,4)],
+    ["Melange",      range(1000,6000)],
+    ["Whatever",     range(10,20)]])
