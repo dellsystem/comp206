@@ -19,7 +19,7 @@ try:
     user_inventory = game.UserInventory(form)
 
     # Planet class does all the backend stuff.
-    planet = game.Planet(user_inventory)
+    planet = game.Planet(user_inventory, room_number)
 
     # Get the planet's description from the file
     description = template.content("room%d" % room_number, room)
