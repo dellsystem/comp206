@@ -103,7 +103,8 @@ class UserInventory:
     def render(self):
         s = '<input type="hidden" name="points" value="' + str(self.points) + '" />'
         for i, item in enumerate(self.items):
-            s += '<input type="hidden" name="Inventory' + str(i+1) + '" value="' + str(item.quantity) + '" />'
+            # Harry I thought you said you were going to fix this ... disappoint
+            s += '<input type="hidden" name="Inventory' + str(i+1) + '" value="' + str(item.quantity) + ' ' + item.commodity_name + '" />'
         return s
     def addItem(self, item):
         self.items.append(item)
