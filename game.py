@@ -31,7 +31,12 @@ class InventoryItem:
         self.quantity += qnty_change
 
     def getCSV( self ):
-        csv = '%s,%d\n' % (self.commodity_name, self.quantity)
+        m = re.search('Space Junk \((.+)\)', self.commodity_name)
+        if m:
+            name = m.group(1)
+        else:
+            name = commodity_name
+        csv = '%s,%d\n' % (name, self.quantity)
         return csv
 
     def fromCSV(entry):
