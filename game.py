@@ -1,5 +1,4 @@
 # game.py - implementation of the commodity trading game including inventory reading and writing
-
 import random, re
 
 # Class which represents the metaclass of the available items for purchase
@@ -11,15 +10,16 @@ class Commodity:
 
     # Used for initializing a Planet's market (see Planet)
     def toInventoryDict(self):
-        return {'name': self.name, 'quantity': 0, 'price': random.choice(self.prices), 'available_quantity': 0}
-
+        return {'name': self.name, 'quantity': 0, 'available_quantity': 0}
 
 # Class which represents the possession of some commodity by the planet. A row in the inventory, if you will.
 # Holds the name of the commodity, the quantity possesed by the planet, and the price at this instant.
+class MalformedCSVError(Exception):
+  pass
+
 class InventoryItem:
-    def __init__(self, commodity_name, quantity, price):
+    def __init__(self, commodity_name, quantity):
         self.quantity = int(quantity)
-        self.price = int(price)
         self.commodity_name = commodity_name
         commodities = filter( lambda x: x.name == commodity_name , Commodities)
         if commodities:
@@ -33,6 +33,13 @@ class InventoryItem:
     def getCSV( self ):
         csv = '%s,%d,\n' % (self.commodity_name, self.quantity)
         return csv
+
+    @staticmethod
+    def fromCSV(entry):
+        values = entry.split(',')
+        if not len(values) == 2:
+          raise MalformedCSVError
+        return InventoryItem(*values)
 
 # Class which represents the collection of currently available items, and manages reading and writing this to disk
 class PlanetInventory:
@@ -48,15 +55,13 @@ class PlanetInventory:
         self.items = []
         for entry in inventory:
             entry.strip('\n')
-            values = entry.split(',')
-            new_item = InventoryItem(*values)
+            new_item = InventoryItem.fromCSV(entry)            
             self.items.append(new_item)
 
         return self.items
 
     def write(self):
         inv_file = open(self.filename, 'w')
-
         for item in self.items:
             line = item.getCSV()
             inv_file.write(line)
@@ -81,16 +86,13 @@ class UserInventory:
         for key in form:
             if re.search('Inventory(\d+)', key):
                 value = form[key].value
-                matches = re.search('^(\d+) (.+)$', value)
+                m = re.search('^(\d+) (.+)$', value)
                 if m:
-                      # Matches our iventory spec, yahoo! Figure out what commodity it is, and add an
-                      # Inventory Item. If the commodity name is recognized (see the init fn for
-                      # InventoryItem), then the price sent here will be ignored. Otherwise, we pick
-                      # a small random value for Space Junk
-                      self.items.append(InventoryItem(m.group(2), m.group(1), random.choice([1,2,3])))
+                    # Matches our iventory spec, yahoo! Use the quantity.
+                    self.items.append(InventoryItem(m.group(2), m.group(1)))
                 else:
-                      # Does not match our inventory spec. Take a tiny quantity and a random price.
-                      self.items.append(InventoryItem(value, 1, random.choice([1,2,3])))
+                    # Does not match our inventory spec. Take a tiny quantity.
+                    self.items.append(InventoryItem(value, 1))
 
     def render(self):
         s = '<input type="hidden" name="points" value="' + str(self.points) + '" />'
@@ -100,13 +102,16 @@ class UserInventory:
 
 # Class which represnets an inventory full of items which may or may not be part of the commodities
 class Planet:
-    def __init__(self, user_inventory):
+    def __init__(self, user_inventory, form):
         self.market = {}
         self.inventory = PlanetInventory()
         self.user_inventory = user_inventory
         # The market has all the standard commodities by default.
         for com in Commodities:
+            # Gets an inventory item using the submitted price if its given, and lets the 
+            # commodity pick one otherwise.
             self.market[com.name] = com.toInventoryDict()
+            self.market[com.name]['price'] = random.choice(com.prices)
 
         # Loop through the items in the planet's inventory. If its a standard item, then
         # add the quantity to the existing item. If its non standard, add it to the list.
@@ -116,7 +121,7 @@ class Planet:
             if item.commodity_name in self.market:
                 self.market[item.commodity_name]['available_quantity'] += item.quantity
             else:
-                self.market[item.commodity_name] = {'name': item.commodity_name, 'quantity': 0, 'price': item.price, 'available_quantity': item.quantity}
+                self.market[item.commodity_name] = {'name': item.commodity_name, 'quantity': 0, 'available_quantity': item.quantity}
 
         # Loop through the items in the user's inventory. If its a standard item, then
         # add the quantity to the existing item. If its non standard, add it to the list.
@@ -126,11 +131,13 @@ class Planet:
             if item.commodity_name in self.market:
                 self.market[item.commodity_name]['quantity'] += item.quantity
             else:
-                self.market[item.commodity_name] = {'name': item.commodity_name, 'quantity': item.quantity, 'price': item.price, 'available_quantity': 0}
+                self.market[item.commodity_name] = {'name': item.commodity_name, 'quantity': item.quantity, 'available_quantity': 0}
+        
+        for key, item in self.market.iteritems():
+            if 'price' not in item:
+              self.market[key]['price'] = random.choice([1,2,3])
 
         self.market = [row for key, row in self.market.iteritems()]
-
-
 
 # Constant listing all the rooms and their attributes
 Rooms = [{'name': "The Moon", 'title': "The Moon", 'image':"moon_thumb", 'url':"~wliu65/206/"},

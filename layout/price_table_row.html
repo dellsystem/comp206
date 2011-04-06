@@ -1,8 +1,13 @@
 <tr>
     <td>$name</td>
-    <td>$price$$</td>
-    <td class="buy"><input id="buy_$name" value="0" /> / $available_quantity</td>
-    <td><button>Buy</button><button>Buy Max</button></td>
-    <td class="sell"><input id="sell_$name" value="0"> / $quantity</td>
-    <td><button>Sell</button><button>Sell Max</button></td>
+    <td>$price$$ <input type="hidden" id="price_$name" name="price_$name" value="$price"></td>
+    <td>$available_quantity</td>
+    <td>$quantity</td>
+    <td><input id="qty_$name" name="qty_$name" value="0"></td>
+    <td>
+      <select id="action_$name" name="action_$name">
+          <option value="buy">Buy</option>
+          <option value="sell">Sell</option>
+       </select>
+    </td>
 </tr>
