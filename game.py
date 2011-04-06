@@ -155,8 +155,8 @@ class Planet:
 
     def commit_purchase_order(self):
         errors = []
-        print "Content-type: text/html"
-        print
+        #print "Content-type: text/html"
+        #print
 
         if 'points' not in self.form:
             errors.append("Malformed form, please try submitting again!")
@@ -175,10 +175,10 @@ class Planet:
                 action = self.form.getfirst("action_"+num)
                 price = self.form.getfirst("price_"+num)
                 
-                print commodity_name
-                print quantity
-                print action
-                print price
+                #print commodity_name
+                #print quantity
+                #print action
+                #print price
 
                 if not commodity_name or not quantity or not action or not price:
                     errors.append("Malformed form, please try submitting again!")
@@ -201,8 +201,8 @@ class Planet:
                         if commodity_name not in self.user_inventory.items:
                             self.user_inventory.addItem(InventoryItem(commodity_name, 0))
 
-                        print commodity_name
-                        print self.user_inventory.items_dict
+                        #print commodity_name
+                        #print self.user_inventory.items_dict
 
                         points -= price * quantity
                         self.user_inventory.items_dict[commodity_name].quantity += quantity
