@@ -21,24 +21,23 @@ try:
     # Planet class does all the backend stuff.
     planet = game.Planet(user_inventory, form, room_number)
 
-    errors_or_points = planet.commit_purchase_order()
-    if isinstance(errors_or_points, list):
+    errors_or_new_points = planet.commit_purchase_order()
+    if isinstance(errors_or_new_points, list):
       # There were errors processing the buy form. Redisplay form with errors.
-      error_text = "<br/>".join(errors_or_points)
+      error_text = '<div class="errors">' + "<br/>".join(errors_or_new_points) + "</div>"
     else:
-      # The inventory commited the transaction. Write it to disk.
-      user_inventory.points = errors_or_points
+      # The inventory commited the transaction without errors. Write it to disk.
+      user_inventory.points = errors_or_new_points
       planet.inventory.write()
       error_text = ""
 
-    # Render stuff
+    # Render all the stuff: the user's inventory, the price table, the planet's description, and the footer map.
+
+    # Render the user's inventory once, its put in a while bunch of places
     points_form = user_inventory.render()
-    # Get the planet's description from the file
-    description = template.content("room%d" % room_number, room)
 
-    # Get the rows of the price table
-    table_rows = [template.content("price_table_row", dict(num=i, **row)) for i, row in enumerate(planet.market)]
-
+    # Get the rows of the price table, so we can then pass it to the table
+    table_rows = [template.content("price_table_row", dict(num=i, **row)) for i, row in enumerate(planet.market())]
     # Get the table using the rows
     table = template.content("price_table", {'rows':''.join(table_rows), 'points_form': points_form})
 
@@ -59,13 +58,15 @@ try:
                                                        'room_id': i+1, 
                                                        'points_form': points_form})
 
+    # Get the planet's description from the file
+    description = template.content("room%d" % room_number, room)
+
     # Render the room template
     template.render("room", {'page_title': room['title'],
                              'page_name': "room%d" % room_number,
                              'description': description,
                              'table': table,
                              'errors': error_text,
-                             # Sanitise shit later whatever
                              'points': user_inventory.points,
                              'footer_rows': footer_rows,
                              'left_url': room_url(room_number-1),

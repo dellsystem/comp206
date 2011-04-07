@@ -42,8 +42,17 @@ class InventoryItem:
         return InventoryItem(*values)
     fromCSV = staticmethod(fromCSV)
 
+class Inventory:
+    def addItem(self, item):
+        # Ensure items are unique
+        if item.commodity_name in self.items_dict:
+            self.items_dict[item.commodity_name].quantity += item.quantity
+        else:
+            self.items.append(item)
+            self.items_dict[item.commodity_name] = item
+
 # Class which represents the collection of currently available items, and manages reading and writing this to disk
-class PlanetInventory:
+class PlanetInventory(Inventory):
     def __init__(self, room_number):
         self.filename = "database/inventory" + str(room_number) + ".csv"
         self.read() # Grab the inventory items upon creation
@@ -70,15 +79,11 @@ class PlanetInventory:
         inv_file.close()
         return self.items
 
-    def addItem(self, new_item):
-        self.items.append(new_item)
-        self.items_dict[new_item.commodity_name] = new_item
-
 # Raised when the form tag describing a user's inventory isn't correctly formatted
 class MalformedGameFormError(Exception):
     pass
 
-class UserInventory:
+class UserInventory(Inventory):
     def __init__(self, form):
         self.items = []
         self.items_dict = {}
@@ -88,6 +93,7 @@ class UserInventory:
             self.points = form["points"].value
 
         # Add all the inventory items we can to this object
+        inventory = {} # Use this to track potential duplicates
         for key in form:
             if re.search('Inventory(\d+)', key):
                 value = form[key].value
@@ -100,64 +106,67 @@ class UserInventory:
                     item = InventoryItem(value, 1)
 
                 self.addItem(item)
+
     def render(self):
         s = '<input type="hidden" name="points" value="' + str(self.points) + '" />'
         for i, item in enumerate(self.items):
             # Harry I thought you said you were going to fix this ... disappoint
             s += '<input type="hidden" name="Inventory' + str(i+1) + '" value="' + str(item.quantity) + ' ' + item.commodity_name + '" />'
         return s
-    def addItem(self, item):
-        self.items.append(item)
-        self.items_dict[item.commodity_name] = item
 
 # Class which represnets an inventory full of items which may or may not be part of the commodities
 class Planet:
     def __init__(self, user_inventory, form, room):
-        self.market = {}
         self.inventory = PlanetInventory(room)
         self.user_inventory = user_inventory
         self.form = form
+
+    def market(self):
+        market = {}
         # The market has all the standard commodities by default.
         for com in Commodities:
             # Gets an inventory item using the submitted price if its given, and lets the
             # commodity pick one otherwise.
-            self.market[com.name] = com.toInventoryDict()
+            market[com.name] = com.toInventoryDict()
             key = 'price_'+com.name
-            if key in form:
-                self.market[com.name]['price'] = self.form.getfirst(key)
+            if key in self.form:
+                market[com.name]['price'] = self.form.getfirst(key)
             else:
-                self.market[com.name]['price'] = random.choice(com.prices)
+                market[com.name]['price'] = random.choice(com.prices)
 
         # Loop through the items in the planet's inventory. If its a standard item, then
         # add the quantity to the existing item. If its non standard, add it to the list.
         # Notice that here, the quantity of the inventory item represents the quantity
         # the planet has to sell to the user, so we put it in the 'available_quantity' key.
         for item in self.inventory.items:
-            if item.commodity_name in self.market:
-                self.market[item.commodity_name]['available_quantity'] += item.quantity
+            if item.commodity_name in market:
+                market[item.commodity_name]['available_quantity'] += item.quantity
             else:
-                self.market[item.commodity_name] = {'name': item.commodity_name, 'quantity': 0, 'available_quantity': item.quantity}
+                market[item.commodity_name] = {'name': item.commodity_name, 'quantity': 0, 'available_quantity': item.quantity}
 
         # Loop through the items in the user's inventory. If its a standard item, then
         # add the quantity to the existing item. If its non standard, add it to the list.
         # Notice that here, the quantity of the inventory item represents the quantity the
         # user has to sell, so we put it in the 'quantity' key.
         for item in self.user_inventory.items:
-            if item.commodity_name in self.market:
-                self.market[item.commodity_name]['quantity'] += item.quantity
+            if item.commodity_name in market:
+                market[item.commodity_name]['quantity'] += item.quantity
             else:
-                self.market[item.commodity_name] = {'name': item.commodity_name, 'quantity': item.quantity, 'available_quantity': 0}
+                market[item.commodity_name] = {'name': item.commodity_name, 'quantity': item.quantity, 'available_quantity': 0}
 
-        for key, item in self.market.iteritems():
+        for key, item in market.iteritems():
             if 'price' not in item:
-                self.market[key]['price'] = random.choice([1,2,3])
+                market[key]['price'] = random.choice([1,2,3])
 
-        self.market = [row for key, row in self.market.iteritems()]
+        # Return a list for easy processing
+        return [row for key, row in market.iteritems()]
 
     def commit_purchase_order(self):
-        errors = []
-        #print "Content-type: text/html"
-        #print
+        errors = [] # List of strings describing issues (if any) with the form
+        commits = [] # List of name, quantity dicts to be applied to the planet's inventory and the user's inventory if there are no errors
+
+        print "Content-type: text/html"
+        print
 
         if 'points' not in self.form:
             errors.append("Malformed form, please try submitting again!")
@@ -176,17 +185,13 @@ class Planet:
                 action = self.form.getfirst("action_"+num)
                 price = self.form.getfirst("price_"+num)
                 
-                #print commodity_name
-                #print quantity
-                #print action
-                #print price
-
                 if not commodity_name or not quantity or not action or not price:
                     errors.append("Malformed form, please try submitting again!")
                     break
                 
                 price = int(price)
                 quantity = int(quantity)
+
                 if quantity > 0:
                     # Validate buy action
                     if action == "buy":
@@ -202,24 +207,22 @@ class Planet:
                         if commodity_name not in self.user_inventory.items:
                             self.user_inventory.addItem(InventoryItem(commodity_name, 0))
 
-                        #print commodity_name
-                        #print self.user_inventory.items_dict
-
                         points -= price * quantity
-                        self.user_inventory.items_dict[commodity_name].quantity += quantity
-                        self.inventory.items_dict[commodity_name].quantity -= quantity
+                        commits.append({'name':commodity_name, 'quantity': -1 * quantity})
+
                     elif action == "sell":
                         if not commodity_name in self.user_inventory.items_dict:
                             errors.append("You can't sell "+commodity_name+" because you don't have any! Tisk!")
                             continue
 
-                        if quantity > self.user_inventory.items_dict[commodity_name]:
-                            errors.append("You can't sell more "+commodity_name+"than you have. Tisk!")
+                        print quantity
+                        print self.user_inventory.items_dict[commodity_name].quantity
+                        if quantity > self.user_inventory.items_dict[commodity_name].quantity:
+                            errors.append("You can't sell more "+commodity_name+" than you have, sorry.")
                             continue
 
                         points += price * quantity
-                        self.user_inventory.items_dict[commodity_name].quantity -= quantity
-                        self.inventory.items_dict[commodity_name].quantity += quantity
+                        commits.append({'name': commodity_name, 'quantity': quantity})
                     else:
                         errors.append("Malformed form, please try submitting again!")
                         break
@@ -229,6 +232,10 @@ class Planet:
         if len(errors) > 0:
             return errors
         else:
+            for commit in commits:
+                self.user_inventory.items_dict[commit['name']].quantity -= commit['quantity']
+                self.inventory.items_dict[commit['name']].quantity += commit['quantity']
+            
             return points
 
 # Constant listing all the rooms and their attributes
