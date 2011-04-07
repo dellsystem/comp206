@@ -217,7 +217,7 @@ class Planet:
                             five_items_error = True
                             continue
                         
-                        # Ensure user has an inventory item representing this item.
+                        # Ensure user has an InventoryItem representing this item.
                         if commodity_name not in self.user_inventory.items:
                             self.user_inventory.addItem(InventoryItem(commodity_name, 0))
 
@@ -232,6 +232,10 @@ class Planet:
                         if quantity > self.user_inventory.items_dict[commodity_name].quantity:
                             errors.append("You can't sell more "+commodity_name+" than you have, sorry.")
                             continue
+                        
+                        # Ensure planet has an InventoryItem representing this item.
+                        if commodity_name not in self.inventory.items:
+                            self.inventory.addItem(InventoryItem(commodity_name, 0))
 
                         points += price * quantity
                         commits.append({'name': commodity_name, 'quantity': quantity})
@@ -248,7 +252,7 @@ class Planet:
             # No errors, commit all the quantity changes to the inventories
             for commit in commits:
                 self.user_inventory.updateQuantity(commit['name'], -1 * commit['quantity'])
-                self.inventory.updateQuantity(commit['name'], -commit['quantity'])
+                self.inventory.updateQuantity(commit['name'], commit['quantity'])
 
             return points
 
