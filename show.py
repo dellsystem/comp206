@@ -39,7 +39,7 @@ try:
     # Get the rows of the price table, so we can then pass it to the table
     table_rows = [template.content("price_table_row", dict(num=i, **row)) for i, row in enumerate(planet.market())]
     # Get the table using the rows
-    table = template.content("price_table", {'rows':''.join(table_rows), 'points_form': points_form})
+    table = template.content("price_table", {'rows':''.join(table_rows), 'points_form': points_form, 'room_id': room_number})
 
     # Get the map for use in the footer
     def room_url(index):
