@@ -1,6 +1,45 @@
 # game.py - implementation of the commodity trading game including inventory reading and writing
 import random, re
 
+# Global function for validating points
+# Pass it a string that you want to be the points
+# Will return either an int representation of it, or 0 if not possible
+def validate_points(points):
+    try:
+        points = int(points)
+    except ValueError:
+        points = 0
+    if points < 0:
+        points = 0
+    return points
+
+# Global function for validating the price
+# Has to be an int greater than 0 ... that's all lol
+def validate_price(price):
+    try:
+        price = int(price)
+    except ValueError:
+        raise
+
+    if price <= 0:
+        raise ValueError
+    else:
+        return price
+    # Throw an invalid price error 
+
+# Global function for validating quantities
+# Has to be 0 or greater
+def validate_quantity(quantity):
+    try:
+        quantity = int(quantity)
+    except ValueError:
+        raise
+
+    if quantity < 0:
+        raise ValueError
+    else:
+        return quantity # for now MONKEY 
+
 # Class which represents the metaclass of the available items for purchase
 # Responsible for managing the global particulars of one entry, such as the price generation
 class Commodity:
@@ -176,10 +215,11 @@ class Planet:
         commits = [] # List of name, quantity dicts to be applied to the planet's inventory and the user's inventory if there are no errors
 
         if 'points' not in self.form:
-            errors.append("Malformed form, please try submitting again!")
+            errors.append("hERE`Malformed form, please try submitting again!")
             return errors
         else:
-            points = int(self.form.getfirst('points'))
+            # Validate points, in case someone is messing around
+            points = validate_points(self.form.getfirst('points'))
 
         # Because there is no isset() in Python T_T
         # See other five_items_error for explanation
@@ -195,13 +235,28 @@ class Planet:
                 quantity = self.form.getfirst("qty_"+num)
                 action = self.form.getfirst("action_"+num)
                 price = self.form.getfirst("price_"+num)
-
+                
+                # Check for the presence of fields
                 if not commodity_name or not quantity or not action or not price:
                     errors.append("Malformed form, please try submitting again!")
                     break
 
-                price = int(price)
-                quantity = int(quantity)
+                # Validate the price
+                try:
+                   price = validate_price(price)
+                   # pass
+                # If the price is invalid
+                except ValueError:
+                    errors.append("Stop trying to break my vases I promise you there are no rupees in them")
+                    break
+
+                # Validate the quantity
+                try:
+                   quantity = validate_quantity(quantity)
+                   # pass
+                except ValueError:
+                    errors.append("Why can't you buy things in regular quantities like normal people? Jeez")
+                    break
 
                 if quantity > 0:
                     # Validate buy action
