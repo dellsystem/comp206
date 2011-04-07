@@ -165,9 +165,6 @@ class Planet:
         errors = [] # List of strings describing issues (if any) with the form
         commits = [] # List of name, quantity dicts to be applied to the planet's inventory and the user's inventory if there are no errors
 
-        print "Content-type: text/html"
-        print
-
         if 'points' not in self.form:
             errors.append("Malformed form, please try submitting again!")
             return errors
@@ -215,8 +212,6 @@ class Planet:
                             errors.append("You can't sell "+commodity_name+" because you don't have any! Tisk!")
                             continue
 
-                        print quantity
-                        print self.user_inventory.items_dict[commodity_name].quantity
                         if quantity > self.user_inventory.items_dict[commodity_name].quantity:
                             errors.append("You can't sell more "+commodity_name+" than you have, sorry.")
                             continue

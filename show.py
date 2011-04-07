@@ -24,7 +24,7 @@ try:
     errors_or_new_points = planet.commit_purchase_order()
     if isinstance(errors_or_new_points, list):
       # There were errors processing the buy form. Redisplay form with errors.
-      error_text = '<div class="errors">' + "<br/>".join(errors_or_new_points) + "</div>"
+      error_text = '<div class="errors pulsed_red">' + "<br/>".join(errors_or_new_points) + "</div>"
     else:
       # The inventory commited the transaction without errors. Write it to disk.
       user_inventory.points = errors_or_new_points

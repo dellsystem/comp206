@@ -123,7 +123,32 @@ label {
     border-color: #76d9fa;
 }
 
+@-webkit-keyframes pulse_red {
+    from {
+        -webkit-box-shadow: 0px 0px 4px #D10F0F;
+        -moz-box-shadow: 0px 0px 4px #D10F0F;
+        box-shadow: 0px 0px 4px #D10F0F;
+        border-color: #FA7676;
+ }
+ to {
+     -webkit-box-shadow: 0px 0px 4px #290303;
+     -moz-box-shadow: 0px 0px 4px #290303;
+     box-shadow: 0px 0px 4px #290303;
+     border-color: #4F2626;   
+ }
+}
 
+.pulsed_red {
+    -webkit-animation-name: pulse_red;
+    -webkit-animation-duration: 3s;
+    -webkit-animation-direction: alternate;
+    -webkit-animation-timing-function: ease-in-out;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-box-shadow: 0px 0px 4px #D10F0F;
+    -moz-box-shadow: 0px 0px 4px #D10F0F;
+    box-shadow: 0px 0px 4px #D10F0F;
+    border-color: #FA7676;
+}
 /* ---------------------------
  * Header and navigation 
  * --------------------------- */
