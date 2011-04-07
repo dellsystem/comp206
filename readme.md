@@ -10,25 +10,15 @@ The state of the repository as it was at the end of assignment 4 is saved under 
 To do
 -----
 
+*   Pass on Space Junk items to other rooms unchanged (i.e. make them keep their original names)
 *   Make the rooms link to different sites (~wliu65/206-5/show.py for the moon, ~hbrund/whatever/show.py for dune etc)
 *   Fix up items (Chantal?), price ranges, and amounts on each planet (edit inventory#.csv
-*   Don't let the user enter points or prices that are not integers. In other words, validate hidden input fields. Also make sure that prices are at least 0, if we're too lazy to make them in the entered range. It doesn't really matter, but it's good to know how to do this anyway. Plus being unsecure just sucks in general.
+*   <del>Don't let the user enter points or prices that are not integers. In other words, validate hidden input fields. Also make sure that prices are at least 0, if we're too lazy to make them in the entered range. It doesn't really matter, but it's good to know how to do this anyway. Plus being unsecure just sucks in general.</del> **Validation mostly done (see if you can break it; if you can, the code is near the top of game.py, fix it plz)**
 
 Things to pay attention to
 --------------------------
 
 *   Atomicity (doing well with that)
-*   Sanitising and validating data (LOL)
+*   Sanitising and validating data (getting there)
 *   Code reuse (we have a working template engine so good enough) 
-*   The model-view-controller concept - .html files will handle all the templating crap (i.e. all the html output - views), the controller will handle all the actions (mostly form submission), and I guess the inventory.csv file will be the essence of the model
-
-Random crap we don't really need but it's here anyways so whatever
-------------------------------------------------------------------
-
-Images:
-
-*   http://sos.noaa.gov/images/Solar_System/moon.jpg
-*   http://www.spacewallpapers.net/wallpapers/displayimage.php?pid=322&fullsize=1
-*   http://dl.dropbox.com/u/18272581/206%20mockup/backgrounds/gallery_948_62_214391.jpg (MAYBE) (GET SOURCE)
-*   http://content.wallpapers-room.com/resolutions/1600x1200/S/Wallpapers-room_com___Sunrise_in_Space_by_gucken_1600x1200.jpg (ALSO MAYBE)
-*   http://dl.dropbox.com/u/18272581/206%20mockup/backgrounds/quantum_space_617.jpg
+*   The model-view-controller concept 
