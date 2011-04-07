@@ -50,7 +50,12 @@ class Inventory:
             self.items_dict[item.commodity_name] = item
 
     def updateQuantity(self, item_name, quantity):
+        # Ensure the Inventory has an InventoryItem representing this item.
+        if item_name not in self.items_dict:
+          self.addItem(InventoryItem(item_name, 0))
+
         item = self.items_dict[item_name]
+        
         item.quantity += quantity
         if item.quantity <= 0:
             del self.items_dict[item_name]
@@ -217,10 +222,6 @@ class Planet:
                             five_items_error = True
                             continue
                         
-                        # Ensure user has an InventoryItem representing this item.
-                        if commodity_name not in self.user_inventory.items:
-                            self.user_inventory.addItem(InventoryItem(commodity_name, 0))
-
                         points -= price * quantity
                         commits.append({'name':commodity_name, 'quantity': -1 * quantity})
 
@@ -232,10 +233,6 @@ class Planet:
                         if quantity > self.user_inventory.items_dict[commodity_name].quantity:
                             errors.append("You can't sell more "+commodity_name+" than you have, sorry.")
                             continue
-                        
-                        # Ensure planet has an InventoryItem representing this item.
-                        if commodity_name not in self.inventory.items:
-                            self.inventory.addItem(InventoryItem(commodity_name, 0))
 
                         points += price * quantity
                         commits.append({'name': commodity_name, 'quantity': quantity})
