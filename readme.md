@@ -10,6 +10,8 @@ The state of the repository as it was at the end of assignment 4 is saved under 
 To do
 -----
 
+*   All 5 inventory input fields should show up regardless of whether or not there is an item to fill them with
+*   If points = 0, user can't do anything, even sell items ? Look into that
 *   Pass on Space Junk items to other rooms unchanged (i.e. make them keep their original names)
 *   Make the rooms link to different sites (~wliu65/206-5/show.py for the moon, ~hbrund/whatever/show.py for dune etc)
 *   Fix up items (Chantal?), price ranges, and amounts on each planet (edit inventory#.csv
