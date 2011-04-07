@@ -171,6 +171,9 @@ class Planet:
         else:
             points = int(self.form.getfirst('points'))
         
+        # Because there is no isset() in Python T_T
+        # See other five_items_error for explanation
+        five_items_error = False
         for key in self.form:
             m = re.search("com_name_([0-9]+)", key)
             if not not m:
@@ -198,6 +201,13 @@ class Planet:
 
                         if quantity > self.inventory.items_dict[commodity_name].quantity:
                             errors.append("You can't buy more "+commodity_name+" than is available, sorry.")
+                            continue
+                        # If the user will have more than 5 items (bad)
+                        if commodity_name not in self.user_inventory.items and len(self.user_inventory.items) > 4:
+                            if not five_items_error:
+                                errors.append("You can only carry five items at a time! Sell some to free up your inventory.")
+                            # Terrible hack but whatever
+                            five_items_error = True
                             continue
                         
                         # Ensure user has an inventory item representing this item.
