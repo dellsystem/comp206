@@ -14,7 +14,7 @@ To do
 *   If points = 0, user can't do anything, even sell items ? Look into that
 *   Pass on Space Junk items to other rooms unchanged (i.e. make them keep their original names)
 *   Make the rooms link to different sites (~wliu65/206-5/show.py for the moon, ~hbrund/whatever/show.py for dune etc)
-*   Fix up items (Chantal?), price ranges, and amounts on each planet (edit inventory#.csv
+*  <del> Fix up items (Chantal?), price ranges, and amounts on each planet (edit inventory#.csv </del>
 *   <del>Don't let the user enter points or prices that are not integers. In other words, validate hidden input fields. Also make sure that prices are at least 0, if we're too lazy to make them in the entered range. It doesn't really matter, but it's good to know how to do this anyway. Plus being unsecure just sucks in general.</del> **Validation mostly done (see if you can break it; if you can, the code is near the top of game.py, fix it plz)**
 
 Things to pay attention to
