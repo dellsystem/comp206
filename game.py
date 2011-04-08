@@ -318,6 +318,11 @@ Rooms = [{'name': "The Moon", 'title': "The Moon", 'image':"moon_thumb", 'url':"
 # Constant listing the default commodities available on every planet, and the range of prices each one might adopt
 Commodities = map(lambda x: Commodity(x[0],x[1]), [["Ore",         range(10,20)],
     ["Laser Swords", range(100,200)],
-    ["Cheese",       range(2,4)],
+    ["Green Cheese",       range(2,4)],
     ["Melange",      range(1000,6000)],
-    ["Whatever",     range(10,20)]])
+    ["Purple Cloud Candy",     range(10,30)],
+    ["Water", range(50, 100)],
+    ["Moon Dust", range(200, 500)],
+    ["Faerie Dust", range(50, 80)],
+    ["Serum of Life", range(1000, 4000)],
+    ["Manthrax", range(500, 5000)]])
