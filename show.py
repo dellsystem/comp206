@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # show.py - Renders a room and the price table to stdout
-# Usage: Visit /show.py?room=# where # is the room number being shown
+# Usage: Send the room number as a post variable (named room) 
 import template, game, cgi
 
 try:
@@ -48,11 +48,15 @@ try:
         elif index == 6:
             return 'http://cs.mcgill.ca/~ztrifi/myPage.html'
         else:
-            return 'show.py'
+            # Uses the list Rooms in game.py
+            # Gets the URL for each room
+            # So we can each host our own room, lol
+            return 'http://cs.mcgill.ca/' + game.Rooms[index-1]['url'] + 'show.py'
 
     footer_rows = ""
     for i,r in enumerate(game.Rooms):
         footer_rows += template.content("footer_row", {'room_name': r['name'],
+                                                       'room_url': room_url(i),
                                                        'image_url': "images/"+r['image']+".jpg",
                                                        'room_url':  room_url(i + 1),
                                                        'room_id': i+1, 

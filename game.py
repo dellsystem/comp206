@@ -311,7 +311,7 @@ class Planet:
 # Constant listing all the rooms and their attributes
 Rooms = [{'name': "The Moon", 'title': "The Moon", 'image':"moon_thumb", 'url':"~wliu65/206-5/"},
         {'name': "Arrakis", 'title': "Arrakis", 'image':"arrakis_thumb", 'url':"~hbrund/comp206-5/"},
-        {'name': "Orion", 'title': "The Orion Nebula", 'image':"orion_thumb", 'url':"~csuder/ass5"},
+        {'name': "Orion", 'title': "The Orion Nebula", 'image':"orion_thumb", 'url':"~csuder/ass5/"},
         {'name': "SSS", 'title': "Shatner Space Station", 'image':"sss_thumb", 'url':"~cleung24/comp206-5/"},
         {'name': "MM", 'title': "Memento Mori", 'image':"mm_thumb", 'url':"~ezarou/ass5/"}]
 
