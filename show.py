@@ -7,7 +7,11 @@ try:
     # Figure out the room number and grab the room info
     form = cgi.FieldStorage()
     # Note: "room" is a POST variable, not GET anymore
-    room_number = int(form.getfirst("room", 1)) # Default of the first room
+    try:
+        room_number = int(form.getfirst("room", 1)) # Default of the first room
+    # If we get passed an invalid room number
+    except ValueError:
+        room_number = 1
     room = game.Rooms[room_number-1]
 
     # Get the user's inventory.
