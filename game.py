@@ -1,6 +1,9 @@
 # game.py - implementation of the commodity trading game including inventory reading and writing
 import random, re
 
+
+
+
 # Global function for validating points
 # Pass it a string that you want to be the points
 # Will return either an int representation of it, or 0 if not possible
@@ -104,7 +107,26 @@ class Inventory:
 class PlanetInventory(Inventory):
     def __init__(self, room_number):
         self.filename = "database/inventory" + str(room_number) + ".csv"
+        self.backup_file = "database/inventory" + str(room_number) + "_initial.csv"
         self.read() # Grab the inventory items upon creation
+    
+    # Global function for reloading the inventory of a planet
+    # Call it when a planet runs out of things to sell
+    # OR when you get a malformed CSV error
+    # Which might happen if someone breaks inventoryx.csv
+    # Not that anyone would do that, except me
+    # Just for fun really
+    def reload_inventory(self):
+        inv_file = open(self.filename, 'w')
+        backup_file = open(self.backup_file, 'r')
+        backup_inventory = backup_file.readlines()
+        for entry in backup_inventory:
+            inv_file.write(entry)
+        inv_file.close()
+        # Now reset the item inventory to 0 or we get problems
+        self.items = []
+
+        return
 
     def read(self):
         inv_file = open(self.filename, 'r')
@@ -115,8 +137,12 @@ class PlanetInventory(Inventory):
         self.items_dict = {}
         for entry in inventory:
             entry.strip('\n')
-            new_item = InventoryItem.fromCSV(entry)
-            self.addItem(new_item)
+            try:
+                new_item = InventoryItem.fromCSV(entry)
+                self.addItem(new_item)
+            except MalformedCSVError:
+                self.reload_inventory()
+                self.read() 
         return self.items
 
     def write(self):
@@ -215,7 +241,7 @@ class Planet:
         commits = [] # List of name, quantity dicts to be applied to the planet's inventory and the user's inventory if there are no errors
 
         if 'points' not in self.form:
-            errors.append("hERE`Malformed form, please try submitting again!")
+            errors.append("Malformed form, please try submitting again!")
             return errors
         else:
             # Validate points, in case someone is messing around
@@ -257,6 +283,10 @@ class Planet:
                 except ValueError:
                     errors.append("Why can't you buy things in regular quantities like normal people? Jeez")
                     break
+
+                # Make sure we're not being passed commas
+                if commodity_name.find(',') is not -1:
+                    errors.append("Stop trying to break our CSV file kthx")
 
                 if quantity > 0:
                     # Validate buy action
