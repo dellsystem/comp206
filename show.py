@@ -6,9 +6,11 @@ import template, game, cgi
 try:
     # Figure out the room number and grab the room info
     form = cgi.FieldStorage()
-    # Note: "room" is a POST variable, not GET anymore
     try:
         room_number = int(form.getfirst("room", 1)) # Default of the first room
+        # Make sure room is between 1 and 5, inclusive
+        if room_number < 1 or room_number > 5:
+            room_number = 1 # defaults to the moon
     # If we get passed an invalid room number
     except ValueError:
         room_number = 1
