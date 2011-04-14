@@ -187,10 +187,13 @@ class UserInventory(Inventory):
 
     def render(self):
         s = '<input type="hidden" name="points" value="' + str(self.points) + '" />'
-        for i, item in enumerate(self.items):
+	for i, item in enumerate(self.items):
             # Harry I thought you said you were going to fix this ... disappoint
             s += '<input type="hidden" name="Inventory' + str(i+1) + '" value="' + str(item.quantity) + ' ' + item.commodity_name + '" />'
-        return s
+        if len(self.items) < 5:
+	    for j in range(len(self.items), 5):
+		s += '<input type="hidden" name="Inventory' + str(j+1) + '" value="" />'
+	return s
 
 # Class which represnets an inventory full of items which may or may not be part of the commodities
 class Planet:
