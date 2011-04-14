@@ -1,6 +1,6 @@
 # game.py - implementation of the commodity trading game including inventory reading and writing
 import random, re
-
+import cgi # Just for escaping, whatever
 
 
 
@@ -68,6 +68,9 @@ class InventoryItem:
             self.commodity = commodities[0]
         else:
             if not re.search('Space Junk \((.+)\)', self.commodity_name):
+                # First escape some shit
+                commodity_name = cgi.escape(commodity_name)
+                commodity_name = commodity_name.replace('"', '&quot;')
                 self.commodity_name = "Space Junk (%s)" % commodity_name
 
     def getCSV( self ):
