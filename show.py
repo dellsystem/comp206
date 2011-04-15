@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # show.py - Renders a room and the price table to stdout
-# Usage: Send the room number as a post variable (named room) 
+# Usage: Send the room number as a post variable (named room)
 import template, game, cgi, os
 
 try:
@@ -36,7 +36,7 @@ try:
       user_inventory.points = errors_or_new_points
       planet.inventory.write()
       error_text = ""
-    
+
     # Get the stats for the user's inventory
     asset_value = planet.userAssetValue()
     net_worth = asset_value + user_inventory.points
@@ -54,12 +54,12 @@ try:
             d[key] = "<b>%d</b>" % d[key]
           else:
             d[key] = "<span class=\"boring\">%d</span>" % d[key]
-        
+
         table_rows.append(template.content("price_table_row", d))
-    
+
     # Get the table using the rows
-    table = template.content("price_table", {'rows':''.join(table_rows), 
-                                             'points_form': points_form, 
+    table = template.content("price_table", {'rows':''.join(table_rows),
+                                             'points_form': points_form,
                                              'room_id': room_number,
                                              'points': user_inventory.points,
                                              'asset_value': asset_value,
@@ -86,7 +86,7 @@ try:
                                                        'room_url': room_url(i),
                                                        'image_url': "images/"+r['image']+".jpg",
                                                        'room_url':  room_url(i + 1),
-                                                       'room_id': i+1, 
+                                                       'room_id': i+1,
                                                        'points_form': points_form})
 
     # Get the planet's description from the file

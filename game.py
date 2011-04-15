@@ -206,7 +206,7 @@ class UserInventory(Inventory):
         i = 0
         for i, item in enumerate(self.items):
             s += '<input type="hidden" name="Inventory' + str(i+1) + '" value="' + str(item.quantity) + ' ' + item.commodity_name + '" />'
-        for i in range(i, 5): # Build up the inventory to always be 5 items long for other sites which can't deal with less than 5
+        for i in range(i+1, 5): # Build up the inventory to always be 5 items long for other sites which can't deal with less than 5
             s += '<input type="hidden" name="Inventory' + str(i+1) + '" value="" />'
         return s
 
@@ -370,6 +370,7 @@ class Planet:
             for commit in commits:
                 self.user_inventory.updateQuantity(commit['name'], -1 * commit['quantity'])
                 self.inventory.updateQuantity(commit['name'], commit['quantity'])
+                self.setMarket()
 
             return points
 
