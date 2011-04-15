@@ -15,6 +15,23 @@ try:
     except ValueError:
         room_number = 1
     room = game.Rooms[room_number-1]
+    
+    # If we need to reload each planet's inventory
+    # Should only occur when someone is logging in for the first time
+    # Or if we need to force reset for some reason
+    reset = form.getfirst("reset", 0)
+    if reset == "all":
+        # Reload every planet's inventory
+        for i in range(5):
+            planet_inventory = game.PlanetInventory(i+1)
+            planet_inventory.reload_inventory()
+    elif reset is not 0:
+        # We have to reset one of the planet's inventories ... which?
+        try:
+           pass 
+        except ValueError:
+            # Trying an illegal operation T_T """
+            pass
 
     # Get the user's inventory.
     # IF THE USER HAS GOTTEN HERE BY LEGITIMATE MEANS
