@@ -216,10 +216,11 @@ class Planet:
         self.inventory = PlanetInventory(room)
         self.user_inventory = user_inventory
         self.form = form
+        self.setMarket()
 
     # Build a nice, easily traversed representation of the planet's and user's inventory in one nice
     # convenient dict of dicts.
-    def market(self):
+    def setMarket(self):
         market = {}
         # The market has all the standard commodities by default.
         for com in Commodities:
@@ -257,7 +258,8 @@ class Planet:
                 market[key]['price'] = random.choice([1,2,3])
 
         # Return a list for easy processing
-        return [row for key, row in market.iteritems()]
+        self.market = [row for key, row in market.iteritems()]
+        return self.market
 
     # Apply the buy/sell orders contained in the form. If they can be successfully applied, then this returns
     # the new number of points the user has. If they can't be applied for any reason, an array of string reasons
@@ -370,6 +372,9 @@ class Planet:
                 self.inventory.updateQuantity(commit['name'], commit['quantity'])
 
             return points
+
+    def userAssetValue(self):
+        return reduce(lambda acc, x: acc + (x['quantity'] * x['price']), self.market, 0)
 
 # Constant listing all the rooms and their attributes
 Rooms = [{'name': "The Moon", 'title': "The Moon", 'image':"moon_thumb", 'url':"~wliu65/206-5/"},

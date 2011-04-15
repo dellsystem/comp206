@@ -36,16 +36,34 @@ try:
       user_inventory.points = errors_or_new_points
       planet.inventory.write()
       error_text = ""
+    
+    # Get the stats for the user's inventory
+    asset_value = planet.userAssetValue()
+    net_worth = asset_value + user_inventory.points
 
     # Render all the stuff: the user's inventory, the price table, the planet's description, and the footer map.
-
     # Render the user's inventory once, its put in a while bunch of places
     points_form = user_inventory.render()
 
     # Get the rows of the price table, so we can then pass it to the table
-    table_rows = [template.content("price_table_row", dict(num=i, **row)) for i, row in enumerate(planet.market())]
+    table_rows = []
+    for i, row in enumerate(planet.market):
+        d = dict(num=i, **row)
+        for key in ['available_quantity', 'quantity']:
+          if d[key] > 0:
+            d[key] = "<b>%d</b>" % d[key]
+          else:
+            d[key] = "<span class=\"boring\">%d</span>" % d[key]
+        
+        table_rows.append(template.content("price_table_row", d))
+    
     # Get the table using the rows
-    table = template.content("price_table", {'rows':''.join(table_rows), 'points_form': points_form, 'room_id': room_number})
+    table = template.content("price_table", {'rows':''.join(table_rows), 
+                                             'points_form': points_form, 
+                                             'room_id': room_number,
+                                             'points': user_inventory.points,
+                                             'asset_value': asset_value,
+                                             'net_worth': net_worth})
 
     # Get the map for use in the footer
     def room_url(index):
@@ -80,7 +98,8 @@ try:
                              'description': description,
                              'table': table,
                              'errors': error_text,
-                             'points': user_inventory.points,
+                             'asset_value': asset_value,
+                             'net_worth': net_worth,
                              'footer_rows': footer_rows,
                              'left_url': room_url(room_number-1),
                              'left_room': room_number-1,

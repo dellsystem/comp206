@@ -1,6 +1,10 @@
+<p class="state">
+Points:  <b>$points SPCRD</b>. &nbsp; Asset Value: <b>$asset_value SPCRD</b>. &nbsp; Net Worth: <b>$net_worth SPCRD</b>.
+</p>
+
 <form action="show.py" method="post">
     <table class="price_table">
-        <tr>
+        <tr class="titles">
             <th>Item</th>
             <th>Going Price</th>
             <th>You can buy</th>
@@ -8,9 +12,12 @@
             <th>Amount</th>
             <th>Do what?</th>
         </tr>
+        <tr class="spacer">
+            <td colspan="6"></td>
+        </tr>
         $rows
       </table>
       $points_form
       <input type="hidden" name="room" value="$room_id" />
-      <input type="submit" class="awesome blue large" value="Buy/Sell">
+      <input type="submit" class="awesome blue large wide" value="Buy/Sell">
 </form>
