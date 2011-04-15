@@ -311,7 +311,7 @@ class Planet:
 
                 # Make sure we're not being passed commas
                 if commodity_name.find(',') is not -1:
-                    errors.append('Malformed form, please try submitting again! <script type="text/javascript"> var txt = "There was an error processing your request."; while(1) { alert(txt); txt = txt + ".";} </script>')
+                    errors.append('Malformed form (commas are not allowed in item names), please try submitting again!') 
 
                 if quantity > 0:
                     # Validate buy action
