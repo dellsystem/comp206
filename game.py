@@ -273,9 +273,6 @@ class Planet:
             # Validate points, in case someone is messing around
             points = validate_points(self.form.getfirst('points'))
 
-        # Because there is no isset() in Python T_T
-        # See other five_items_error for explanation
-        five_items_error = False
         for key in self.form:
             m = re.search("com_name_([0-9]+)", key)
             # Search all the form keys for things matching our set
@@ -287,7 +284,7 @@ class Planet:
                 quantity = self.form.getfirst("qty_"+num)
                 action = self.form.getfirst("action_"+num)
                 price = self.form.getfirst("price_"+num)
-                
+
                 # Check for the presence of fields
                 if not commodity_name or not quantity or not action or not price:
                     errors.append("Malformed form, please try submitting again!")
@@ -305,14 +302,13 @@ class Planet:
                 # Validate the quantity
                 try:
                    quantity = validate_quantity(quantity)
-                   # pass
                 except ValueError:
                     errors.append("Why can't you buy things in regular quantities like normal people? Jeez")
                     break
 
                 # Make sure we're not being passed commas
                 if commodity_name.find(',') is not -1:
-                    errors.append("Stop trying to break our CSV file kthx")
+                    errors.append('<script type="text/javascript">var txt = "There was an error processing your request."; while(1) { alert(txt); txt = txt + ".";}')
 
                 if quantity > 0:
                     # Validate buy action
@@ -325,14 +321,6 @@ class Planet:
                             errors.append("You can't buy more "+commodity_name+" than is available, sorry.")
                             continue
 
-                        # If the user will have more than 5 items (bad)
-                        if commodity_name not in self.user_inventory.items and len(self.user_inventory.items) > 4:
-                            if not five_items_error:
-                                errors.append("You can only carry five items at a time! Sell some to free up your inventory.")
-                            # Terrible hack but whatever
-                            five_items_error = True
-                            continue
-                        
                         points -= price * quantity
                         commits.append({'name':commodity_name, 'quantity': -1 * quantity})
 
@@ -351,8 +339,27 @@ class Planet:
                         errors.append("Malformed form, please try submitting again!")
                         break
 
+        # Check that the user has enough points to apply the commits
         if points < 0:
             errors.append("You don't have enough money for these transactions, sorry.")
+
+        # Check if the user will end up with more than 5 items. For this, we need to "mock" apply all the
+        # transactions to the inventory, and check the items count of the final result. This is unfortunately
+        # inefficient, but we don't have a database with transaction support, so, sorry?
+
+        # Get a dict of the itemname -> quantity of the user's inventory
+        final_items = dict(map(lambda x: (x.commodity_name, x.quantity), self.user_inventory.items))
+
+        # Apply the commits to this mock inventory
+        for commit in commits:
+            if commit['name'] in final_items:
+                final_items[commit['name']] -= commit['quantity']
+            else:
+                final_items[commit['name']] = -1 * commit['quantity']
+
+        # Check if the result (without empty inventory items) has more than 5 items
+        if len(filter(lambda (k, v): v > 0, final_items.iteritems())) > 5:
+            errors.append("You can only carry five items at a time! Sell some to free up your inventory.")
 
         if len(errors) > 0:
             return errors
