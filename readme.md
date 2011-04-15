@@ -1,11 +1,16 @@
+EVERYBODY PULL
+==============
+
+Just do it
+
 TO-DO LIST
 ==========
 
 **Things in bold are relatively important ... that is, relative to the things not in bold**
 
-*   <del>**All 5 inventory input fields should show up regardless of whether or not there is an item to fill them with**</del>
-*   If points = 0, user can't do anything, even sell items ? Look into that
-*   **Pass on Space Junk items to other rooms unchanged (i.e. make them keep their original names)**
+*   <del>All 5 inventory input fields should show up regardless of whether or not there is an item to fill them with</del>
+*   <del>If points = 0, user can't do anything, even sell items ? Look into that</del> guess we're not doing this. THANKS FOR ASKING ON THE DISCUSSION BOARD ABOUT THIS CLARENCE, YOU'RE REALLY HELPFUL
+*   <del>Pass on Space Junk items to other rooms unchanged (i.e. make them keep their original names)</del> fuck it
 *   <del>If we run out of items ... make a reload() method that can reinitialise the important items (i.e. the ones from our game) if they all go to 0? Not absolutely necessary, but i did suggest it to someone else on webct and it seems like a sensible idea if i do say so myself</del>
 *   <del>Make the rooms link to different sites (~wliu65/206-5/show.py for the moon, ~hbrund/whatever/show.py for dune etc)</del> done ... it's cuz i'm a genius
 *  <del> Fix up items (Chantal?), price ranges, and amounts on each planet (edit inventory#.csv  **Still need to fix up some items ... for example, the space junk shit should probably not be there initially**</del>
