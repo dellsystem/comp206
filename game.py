@@ -5,6 +5,7 @@ import cgi # Just for escaping, whatever
 # Global function for validating points
 # Pass it a string that you want to be the points
 # Will return either an int representation of it, or 0 if not possible
+# Means that you can't ever have negative or non-integer points
 def validate_points(points):
     try:
         points = int(points)
@@ -15,7 +16,7 @@ def validate_points(points):
     return points
 
 # Global function for validating the price
-# Has to be an int greater than 0 ... that's all lol
+# Has to be a non-negative integer
 def validate_price(price):
     try:
         price = int(price)
@@ -39,7 +40,7 @@ def validate_quantity(quantity):
     if quantity < 0:
         raise ValueError
     else:
-        return quantity # for now MONKEY
+        return quantity
 
 # Class which represents the metaclass of the available items for purchase
 # Responsible for managing the global particulars of one entry, such as the price generation
@@ -111,6 +112,7 @@ class Inventory:
             del self.items_dict[item_name]
             self.items = filter(lambda item: item.commodity_name != item_name, self.items)
 
+    # Sets the user's inventory to empty
     def empty(self):
         self.items = []
         self.items_dict = {}
@@ -123,11 +125,12 @@ class PlanetInventory(Inventory):
         self.read() # Grab the inventory items upon creation
 
     # Function for reloading the inventory of a planet
-    # Call it when a planet runs out of things to sell
-    # OR when you get a malformed CSV error
-    # Which might happen if someone breaks inventoryx.csv
-    # Not that anyone would do that, except me
-    # Just for fun really
+    # Called when inventoryx.csv gets broken
+    # The above should never happen, though
+    # Also called when we force reset
+    # This is done upon logging in
+    # And we can reset individual planets by doing:
+    # show.py?points=100&room=x&reset=this
     def reload_inventory(self):
         inv_file = open(self.filename, 'w')
         backup_file = open(self.backup_file, 'r')
@@ -135,6 +138,7 @@ class PlanetInventory(Inventory):
         for entry in backup_inventory:
             inv_file.write(entry)
         inv_file.close()
+
         # Now reset the item inventory to 0 or we get problems
         self.items = []
 

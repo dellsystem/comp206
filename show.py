@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # show.py - Renders a room and the price table to stdout
 # Usage: Send the room number as a post variable (named room)
+# A points field need also be present or the user is not considered logged in
 import template, game, cgi, os
 
 try:
@@ -26,16 +27,11 @@ try:
             planet_inventory = game.PlanetInventory(i+1)
             planet_inventory.reload_inventory()
     elif reset == "this":
-        # Reset this room's inventory
+        # Reset this planet's inventory
         planet_inventory = game.PlanetInventory(room_number)
         planet_inventory.reload_inventory()
 
     # Get the user's inventory.
-    # IF THE USER HAS GOTTEN HERE BY LEGITIMATE MEANS
-    # Only logged in if there's a points input field
-    # This will be true if we're coming from another game/room/login
-    # Will raise an exception if the required info isn't present, and
-    # send the user back to the login page (see below)
     user_inventory = game.UserInventory(form)
 
     # Planet class does all the backend stuff.
@@ -56,7 +52,6 @@ try:
     net_worth = asset_value + user_inventory.points
 
     # Render all the stuff: the user's inventory, the price table, the planet's description, and the footer map.
-    # Render the user's inventory once, its put in a while bunch of places
     points_form = user_inventory.render()
 
     # Get the rows of the price table, so we can then pass it to the table
@@ -98,9 +93,10 @@ try:
             # Gets the URL for each room
             # So we can each host our own room, lol
             if os.path.exists("./development_mode"):
-              return 'show.py'
+                # For debugging
+                return 'show.py'
             else:
-              return 'http://cs.mcgill.ca/' + game.Rooms[index-1]['url'] + 'show.py'
+                return 'http://cs.mcgill.ca/' + game.Rooms[index-1]['url'] + 'show.py'
 
     footer_rows = ""
     for i,r in enumerate(game.Rooms):
@@ -129,6 +125,8 @@ try:
                              'right_room': room_number+1,
                              'points_form': points_form})
 
+# Will be raised if there is no points field, for instance
+# Means the user isn't "logged in"
 except game.MalformedGameFormError:
     # Go back to the login page teehee
     template.render("login", dict(page_title="Login", layout="logged_out"))
