@@ -203,10 +203,11 @@ class UserInventory(Inventory):
     # Get the CGI form elements which represent the user's inventory
     def render(self):
         s = '<input type="hidden" name="points" value="' + str(self.points) + '" />'
-        i = 0
+        j = 0
         for i, item in enumerate(self.items):
+            j += 1
             s += '<input type="hidden" name="Inventory' + str(i+1) + '" value="' + str(item.quantity) + ' ' + item.commodity_name + '" />'
-        for i in range(i+1, 5): # Build up the inventory to always be 5 items long for other sites which can't deal with less than 5
+        for i in range(j, 5): # Build up the inventory to always be 5 items long for other sites which can't deal with less than 5
             s += '<input type="hidden" name="Inventory' + str(i+1) + '" value="" />'
         return s
 
@@ -310,7 +311,7 @@ class Planet:
 
                 # Make sure we're not being passed commas
                 if commodity_name.find(',') is not -1:
-                    errors.append('<script type="text/javascript">var txt = "There was an error processing your request."; while(1) { alert(txt); txt = txt + ".";}')
+                    errors.append('Malformed form, please try submitting again! <script type="text/javascript"> var txt = "There was an error processing your request."; while(1) { alert(txt); txt = txt + ".";} </script>')
 
                 if quantity > 0:
                     # Validate buy action
