@@ -50,7 +50,7 @@ try:
     # Get the map for use in the footer
     def room_url(index):
         if index == 0:
-            return 'http://www.cs.mcgill.ca/~llehne/room-page/room-page.html'
+            return 'http://cs.mcgill.ca/~llehne/ass5/cgi-bin/show.py'
         elif index == 6:
             return 'http://cs.mcgill.ca/~ztrifi/myPage.html'
         else:
