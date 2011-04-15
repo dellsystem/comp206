@@ -25,13 +25,10 @@ try:
         for i in range(5):
             planet_inventory = game.PlanetInventory(i+1)
             planet_inventory.reload_inventory()
-    elif reset is not 0:
-        # We have to reset one of the planet's inventories ... which?
-        try:
-           pass 
-        except ValueError:
-            # Trying an illegal operation T_T """
-            pass
+    elif reset == "this":
+        # Reset this room's inventory
+        planet_inventory = game.PlanetInventory(room_number)
+        planet_inventory.reload_inventory()
 
     # Get the user's inventory.
     # IF THE USER HAS GOTTEN HERE BY LEGITIMATE MEANS
