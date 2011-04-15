@@ -5,10 +5,15 @@ body, html {
     height: 100%; /* Need this for sticky footer */
 }
 
+h1, h2, h3, h4, h5, h6, .page-header, #menu li {
+    font-family: 'Orbitron', arial, serif;
+}
+
 body {
     padding: 0;
     margin: 0;
-    font-family: 'Lucida Grande', 'Helvetica Neue', Verdana, Arial, sans-serif;
+    font-family: 'Droid Sans', 'Lucida Grande', Verdana, Arial, sans-serif;
+    font-weight: 500;
     color: #FFF;
     line-height: 1.2;
 }
@@ -408,12 +413,23 @@ Just doing opacity = whatever will affect child elements too */
     display: block;
 }
 
+input.wide {
+    display: block;
+    width: 200px;
+    margin: 0 auto;
+}
 /* ----------------------
  * Styling for the buy form
  * ---------------------- */
- .price_table {
+.price_table {
     width: 100%;
- }
+}
+.price_table th {
+  border-bottom: 1px #CCC solid;
+}
+.price_table tr.spacer td {
+  padding-bottom: 4px;
+}
 .price_table td, .price_table th {
     text-align: left;
     padding: 0px 0px 0px 5px;
@@ -428,4 +444,7 @@ Just doing opacity = whatever will affect child elements too */
     border: 1px solid #F00;
     padding: 10px;
     margin-bottom: 1em;
+}
+.price_table .boring {
+  color: #666;
 }
