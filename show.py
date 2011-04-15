@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # show.py - Renders a room and the price table to stdout
 # Usage: Send the room number as a post variable (named room) 
-import template, game, cgi
+import template, game, cgi, os
 
 try:
     # Figure out the room number and grab the room info
@@ -57,7 +57,10 @@ try:
             # Uses the list Rooms in game.py
             # Gets the URL for each room
             # So we can each host our own room, lol
-            return 'http://cs.mcgill.ca/' + game.Rooms[index-1]['url'] + 'show.py'
+            if os.path.exists("./development_mode"):
+              return 'show.py'
+            else:
+              return 'http://cs.mcgill.ca/' + game.Rooms[index-1]['url'] + 'show.py'
 
     footer_rows = ""
     for i,r in enumerate(game.Rooms):

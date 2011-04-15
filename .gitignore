@@ -3,3 +3,4 @@
 *~
 *.pyc
 .htaccess
+development_mode

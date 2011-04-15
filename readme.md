@@ -21,3 +21,4 @@ The state of the repository as it was at the end of assignment 4 is saved under 
 3.  `cd` into the new directory and run `git init`. Then run `git remote add origin git@github.com:dellsystem/comp206.git`, then pull with `git pull origin master`.
 4.  <del>If you haven't done so already, add the URL of your ass5 directory to near the bottom of game.py. </del> I figured them out (I'm a genius)
 
+If you want to be able to test all the rooms on your host instead of across everyone's different rooms, create a file called 'development_mode' in your project directory. No extension or anything. If the game sees this file, it will use the local copy of show.py for every room, instead of linking around the whole freaking McGill campus. Woo!
