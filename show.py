@@ -49,11 +49,19 @@ try:
     table_rows = []
     for i, row in enumerate(planet.market):
         d = dict(num=i, **row)
+        if d['quantity'] == 0:
+            d['buy_selected'] = 'selected="selected"'
+            d['sell_selected'] = ''
+        else:
+            d['buy_selected'] = ''
+            d['sell_selected'] = 'selected="selected"'
+
         for key in ['available_quantity', 'quantity']:
-          if d[key] > 0:
-            d[key] = "<b>%d</b>" % d[key]
-          else:
-            d[key] = "<span class=\"boring\">%d</span>" % d[key]
+            if d[key] > 0:
+                d[key] = "<b>%d</b>" % d[key]
+            else:
+                d[key] = "<span class=\"boring\">%d</span>" % d[key]
+
 
         table_rows.append(template.content("price_table_row", d))
 
