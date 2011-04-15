@@ -2,8 +2,6 @@
 import random, re
 import cgi # Just for escaping, whatever
 
-
-
 # Global function for validating points
 # Pass it a string that you want to be the points
 # Will return either an int representation of it, or 0 if not possible
@@ -24,11 +22,11 @@ def validate_price(price):
     except ValueError:
         raise
 
+    # Throw an invalid price error
     if price <= 0:
         raise ValueError
     else:
         return price
-    # Throw an invalid price error 
 
 # Global function for validating quantities
 # Has to be 0 or greater
@@ -41,7 +39,7 @@ def validate_quantity(quantity):
     if quantity < 0:
         raise ValueError
     else:
-        return quantity # for now MONKEY 
+        return quantity # for now MONKEY
 
 # Class which represents the metaclass of the available items for purchase
 # Responsible for managing the global particulars of one entry, such as the price generation
@@ -60,6 +58,14 @@ class MalformedCSVError(Exception):
 # Class which represents the possession of some commodity by the planet. A row in the inventory, if you will.
 # Holds the name of the commodity, the quantity possesed by the planet, and the price at this instant.
 class InventoryItem:
+    # Initializes an InventoryItem from a line in a CSV
+    def fromCSV(entry):
+        values = entry.split(',')
+        if not len(values) == 2:
+            raise MalformedCSVError
+        return InventoryItem(*values)
+    fromCSV = staticmethod(fromCSV)
+
     def __init__(self, commodity_name, quantity):
         self.quantity = int(quantity)
         self.commodity_name = commodity_name
@@ -73,19 +79,18 @@ class InventoryItem:
                 commodity_name = commodity_name.replace('"', '&quot;')
                 self.commodity_name = "Space Junk (%s)" % commodity_name
 
+    # Renders out a representation of this item as a row for CSV
     def getCSV( self ):
-        csv = '%s,%d\n' % (self.commodity_name, self.quantity)
-        return csv
+        return '%s,%d\n' % (self.commodity_name, self.quantity)
 
-    def fromCSV(entry):
-        values = entry.split(',')
-        if not len(values) == 2:
-            raise MalformedCSVError
-        return InventoryItem(*values)
-    fromCSV = staticmethod(fromCSV)
 
-# Inventory class which the PlanetInventory and UserInventory classes extend
+# Inventory class which the PlanetInventory and UserInventory classes extend.
+# Add items using addItem, change their quantity by using updateQuantity,
+# and delete items by updating their quantity to be 0.
 class Inventory:
+
+    # Method to add a new item to the inventory. This is nessecary because we need to
+    # track and update both the #items and #items_dict containers.
     def addItem(self, item):
         # Ensure items are unique
         if item.commodity_name in self.items_dict:
@@ -97,14 +102,18 @@ class Inventory:
     def updateQuantity(self, item_name, quantity):
         # Ensure the Inventory has an InventoryItem representing this item.
         if item_name not in self.items_dict:
-          self.addItem(InventoryItem(item_name, 0))
+            self.addItem(InventoryItem(item_name, 0))
 
         item = self.items_dict[item_name]
-        
+
         item.quantity += quantity
         if item.quantity <= 0:
             del self.items_dict[item_name]
             self.items = filter(lambda item: item.commodity_name != item_name, self.items)
+
+    def empty(self):
+        self.items = []
+        self.items_dict = {}
 
 # Class which represents the collection of currently available items, and manages reading and writing this to disk
 class PlanetInventory(Inventory):
@@ -112,8 +121,8 @@ class PlanetInventory(Inventory):
         self.filename = "database/inventory" + str(room_number) + ".csv"
         self.backup_file = "database/inventory" + str(room_number) + "_initial.csv"
         self.read() # Grab the inventory items upon creation
-    
-    # Global function for reloading the inventory of a planet
+
+    # Function for reloading the inventory of a planet
     # Call it when a planet runs out of things to sell
     # OR when you get a malformed CSV error
     # Which might happen if someone breaks inventoryx.csv
@@ -131,23 +140,26 @@ class PlanetInventory(Inventory):
 
         return
 
+    # Reads and initializes the items in the inventory from CSV.
     def read(self):
         inv_file = open(self.filename, 'r')
         inventory = inv_file.readlines()
         inv_file.close()
 
-        self.items = []
-        self.items_dict = {}
+        self.empty()
         for entry in inventory:
             entry.strip('\n')
+            # We try to load the inventory from the file, and if we are unsuccessful
+            # we revert to a known, solid backup.
             try:
                 new_item = InventoryItem.fromCSV(entry)
                 self.addItem(new_item)
             except MalformedCSVError:
                 self.reload_inventory()
-                self.read() 
+                self.read()
         return self.items
 
+    # Writes out the items to CSV.
     def write(self):
         inv_file = open(self.filename, 'w')
         for item in self.items:
@@ -161,14 +173,17 @@ class PlanetInventory(Inventory):
 class MalformedGameFormError(Exception):
     pass
 
+# Class which manages a User's inventory, marshalling to and back from a CGI POST form.
 class UserInventory(Inventory):
     def __init__(self, form):
-        self.items = []
-        self.items_dict = {}
+        # Validate user form
         if "points" not in form:
             raise MalformedGameFormError()
         else:
-            self.points = form["points"].value
+            self.points = validate_points(form.getfirst("points"))
+
+        # Init tracking containers
+        self.empty()
 
         # Add all the inventory items we can to this object
         inventory = {} # Use this to track potential duplicates
@@ -185,23 +200,25 @@ class UserInventory(Inventory):
 
                 self.addItem(item)
 
+    # Get the CGI form elements which represent the user's inventory
     def render(self):
         s = '<input type="hidden" name="points" value="' + str(self.points) + '" />'
-	for i, item in enumerate(self.items):
-            # Harry I thought you said you were going to fix this ... disappoint
+        i = 0
+        for i, item in enumerate(self.items):
             s += '<input type="hidden" name="Inventory' + str(i+1) + '" value="' + str(item.quantity) + ' ' + item.commodity_name + '" />'
-        if len(self.items) < 5:
-	    for j in range(len(self.items), 5):
-		s += '<input type="hidden" name="Inventory' + str(j+1) + '" value="" />'
-	return s
+        for i in range(i, 5): # Build up the inventory to always be 5 items long for other sites which can't deal with less than 5
+            s += '<input type="hidden" name="Inventory' + str(i+1) + '" value="" />'
+        return s
 
-# Class which represnets an inventory full of items which may or may not be part of the commodities
+# Class which represents an inventory full of items which may or may not be part of the commodities
 class Planet:
     def __init__(self, user_inventory, form, room):
         self.inventory = PlanetInventory(room)
         self.user_inventory = user_inventory
         self.form = form
 
+    # Build a nice, easily traversed representation of the planet's and user's inventory in one nice
+    # convenient dict of dicts.
     def market(self):
         market = {}
         # The market has all the standard commodities by default.
@@ -242,6 +259,9 @@ class Planet:
         # Return a list for easy processing
         return [row for key, row in market.iteritems()]
 
+    # Apply the buy/sell orders contained in the form. If they can be successfully applied, then this returns
+    # the new number of points the user has. If they can't be applied for any reason, an array of string reasons
+    # is returned, suitable for showing the user.
     def commit_purchase_order(self):
         errors = [] # List of strings describing issues (if any) with the form
         commits = [] # List of name, quantity dicts to be applied to the planet's inventory and the user's inventory if there are no errors
