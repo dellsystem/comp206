@@ -82,7 +82,7 @@ class InventoryItem:
             else:
                 # Escape shit anyway ... baaaad exploit
                 commodity_name = cgi.escape(commodity_name)
-                commodity_name = commodity_name.replace('"', '&quote;')
+                commodity_name = commodity_name.replace('"', '&quot;')
                 self.commodity_name = commodity_name
                 # T_T my fault for not noticing this before
 
