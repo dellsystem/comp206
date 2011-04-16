@@ -79,6 +79,12 @@ class InventoryItem:
                 commodity_name = cgi.escape(commodity_name)
                 commodity_name = commodity_name.replace('"', '&quot;')
                 self.commodity_name = "Space Junk (%s)" % commodity_name
+            else:
+                # Escape shit anyway ... baaaad exploit
+                commodity_name = cgi.escape(commodity_name)
+                commodity_name = commodity_name.replace('"', '&quote;')
+                self.commodity_name = commodity_name
+                # T_T my fault for not noticing this before
 
     # Renders out a representation of this item as a row for CSV
     def getCSV( self ):
