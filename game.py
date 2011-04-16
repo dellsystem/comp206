@@ -339,6 +339,10 @@ class Planet:
 
                     elif action == "sell":
                         if not commodity_name in self.user_inventory.items_dict:
+                            # Whatever just escape it
+                            # It's useless but vulnerabilities still suck
+                            commodity_name = cgi.escape(commodity_name)
+                            commodity_name = commodity_name.replace('"', '&quot;')
                             errors.append("You can't sell "+commodity_name+" because you don't have any! Tisk!")
                             continue
 
